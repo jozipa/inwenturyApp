@@ -1,0 +1,568 @@
+[
+  {
+    "id": 1,
+    "name": "Koszulka Kraków Smok Paszcza (M)",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "imageUrl": "/images/paszcza-A.png",
+    "description": "Koszulka z grafiką smoka wawelskiego. 100% bawełna.",
+    "sizes": {
+      "S": 6,
+      "M": 5,
+      "L": 6,
+      "XL": 4,
+      "XXL": 1
+    }
+  },
+  {
+    "id": 1753701586482,
+    "name": "Koszulka Kraków Smocza Paszcza (K)",
+    "description": "smok paszcza",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 3,
+      "5-6": 3,
+      "7-8": 1,
+      "9-11": 1,
+      "12-14": 1
+    },
+    "imageUrl": "/images/1753701586474.jpg"
+  },
+  {
+    "id": 1753701822572,
+    "name": "Koszulka Kraków City Jurajski (M)",
+    "description": "Dorosły",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 0,
+      "M": 4,
+      "L": 2,
+      "XL": 0,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753701822569.jpg"
+  },
+  {
+    "id": 1753701879386,
+    "name": "Koszulka Kraków City Jurajski (K)",
+    "description": "Dzeci",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 2,
+      "5-6": 2,
+      "7-8": 3,
+      "9-11": 3,
+      "12-14": 3
+    },
+    "imageUrl": "/images/1753701879383.jpg"
+  },
+  {
+    "id": 1753703007554,
+    "name": "Koszulka Kraków Smok Skorupa (K)",
+    "description": "Skorupa",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 3,
+      "2": 2,
+      "3-4": 2,
+      "5-6": 3,
+      "7-8": 3,
+      "9-11": 0,
+      "12-14": 3
+    },
+    "imageUrl": "/images/1753703007552.png"
+  },
+  {
+    "id": 1753703589934,
+    "name": "Koszulka I LOVE KRAKÓW (M)",
+    "description": "love",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 2,
+      "M": 2,
+      "L": 3,
+      "XL": 3,
+      "XXL": 2
+    },
+    "imageUrl": "/images/1753703589933.jpg"
+  },
+  {
+    "id": 1753703837740,
+    "name": "Koszulka Smok Ognisty MK (M)",
+    "description": "mortal combat",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 2,
+      "M": 2,
+      "L": 1,
+      "XL": 4,
+      "XXL": 3
+    },
+    "imageUrl": "/images/1753703837739.jpg"
+  },
+  {
+    "id": 1753703871235,
+    "name": "Koszulka Smok Ognisty MK (K)",
+    "description": "mortal combat",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 3,
+      "5-6": 3,
+      "7-8": 4,
+      "9-11": 0,
+      "12-14": 0
+    },
+    "imageUrl": "/images/1753703871233.jpg"
+  },
+  {
+    "id": 1753705854718,
+    "name": "Koszulka Kraków Smok Forever (M)",
+    "description": "forever",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 4,
+      "M": 3,
+      "L": 2,
+      "XL": 2,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753705854715.jpg"
+  },
+  {
+    "id": 1753706150783,
+    "name": "Koszulka Kraków Smok Forever (K)",
+    "description": "forever",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 0,
+      "5-6": 0,
+      "7-8": 0,
+      "9-11": 1,
+      "12-14": 4
+    },
+    "imageUrl": "/images/1753706150780.jpg"
+  },
+  {
+    "id": 1753708497551,
+    "name": "Koszulka Kraków Retro Kolor (M)",
+    "description": "retro",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 3,
+      "M": 5,
+      "L": 0,
+      "XL": 3,
+      "XXL": 2
+    },
+    "imageUrl": "/images/1753708497550.jpg"
+  },
+  {
+    "id": 1753713139018,
+    "name": "Koszulka Kraków Kolory CMYK (M)",
+    "description": "cmyk",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 1,
+      "M": 0,
+      "L": 0,
+      "XL": 0,
+      "XXL": 0
+    },
+    "imageUrl": "/images/1753713139010.jpg"
+  },
+  {
+    "id": 1753713190469,
+    "name": "Koszulka Kraków Kolory CMYK (K)",
+    "description": "cmyk",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 2,
+      "5-6": 2,
+      "7-8": 1,
+      "9-11": 0,
+      "12-14": 0
+    },
+    "imageUrl": "/images/1753713190466.jpg"
+  },
+  {
+    "id": 1753713242501,
+    "name": "Koszulka Cracow Kolory CMYK (M)",
+    "description": "cmyk",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 1,
+      "M": 1,
+      "L": 3,
+      "XL": 1,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753713252839.jpg"
+  },
+  {
+    "id": 1753714348287,
+    "name": "Koszulka Kraków Kościół Mariacki (M)",
+    "description": "mariacki",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 2,
+      "M": 1,
+      "L": 2,
+      "XL": 1,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753714348285.jpg"
+  },
+  {
+    "id": 1753714398319,
+    "name": "Koszulka Kraków Kościół Mariacki (K)",
+    "description": "mariacki",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 0,
+      "5-6": 0,
+      "7-8": 0,
+      "9-11": 0,
+      "12-14": 0
+    },
+    "imageUrl": "/images/1753714398317.jpg"
+  },
+  {
+    "id": 1753714715193,
+    "name": "Koszulka Kraków Sukiennice Mono (M)",
+    "description": "sukiennice",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 2,
+      "M": 1,
+      "L": 1,
+      "XL": 1,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753714715190.jpg"
+  },
+  {
+    "id": 1753715020271,
+    "name": "Koszulka Kraków Symbole (M)",
+    "description": "symbole",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 0,
+      "M": 0,
+      "L": 0,
+      "XL": 0,
+      "XXL": 0
+    },
+    "imageUrl": "/images/1753715020269.jpg"
+  },
+  {
+    "id": 1753715373352,
+    "name": "Koszulka Kraków Smok w Ogniu (M)",
+    "description": "ogień",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 2,
+      "M": 2,
+      "L": 0,
+      "XL": 1,
+      "XXL": 0
+    },
+    "imageUrl": "/images/1753715373350.jpg"
+  },
+  {
+    "id": 1753715479083,
+    "name": "Koszulka Kraków Smok w Ogniu (K)",
+    "description": "ogień",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 0,
+      "5-6": 0,
+      "7-8": 2,
+      "9-11": 0,
+      "12-14": 0
+    },
+    "imageUrl": "/images/1753715479078.jpg"
+  },
+  {
+    "id": 1753715876698,
+    "name": "Koszulka Kraków Wawel Panorama Noc (M)",
+    "description": "wawel",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 0,
+      "M": 0,
+      "L": 0,
+      "XL": 0,
+      "XXL": 0
+    },
+    "imageUrl": "/images/1753715876696.jpg"
+  },
+  {
+    "id": 1753716483503,
+    "name": "Koszulka Kraków Herb (K)",
+    "description": "herb",
+    "categories": [
+      "shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 3,
+      "5-6": 3,
+      "7-8": 3,
+      "9-11": 3,
+      "12-14": 3
+    },
+    "imageUrl": "/images/1753716483501.jpg"
+  },
+  {
+    "id": 1753716723206,
+    "name": "Koszulka Kraków Herb (M)",
+    "description": "Herb",
+    "categories": [
+      "shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 3,
+      "M": 4,
+      "L": 4,
+      "XL": 1,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753716723203.jpg"
+  },
+  {
+    "id": 1753731156185,
+    "name": "Koszulka Kraków Moim Życiem (M)",
+    "description": "życiem",
+    "categories": [
+      "Shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 1,
+      "M": 2,
+      "L": 1,
+      "XL": 2,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753731156179.jpg"
+  },
+  {
+    "id": 1753731381112,
+    "name": "Koszulka Kraków Wawel Noc (M)",
+    "description": "Waw noc",
+    "categories": [
+      "Shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 3,
+      "M": 3,
+      "L": 1,
+      "XL": 2,
+      "XXL": 0
+    },
+    "imageUrl": "/images/1753731381109.jpg"
+  },
+  {
+    "id": 1753731583941,
+    "name": "Koszulka Kraków Pieczęć (M)",
+    "description": "Pieczęć",
+    "categories": [
+      "Shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 4,
+      "M": 1,
+      "L": 4,
+      "XL": 2,
+      "XXL": 0
+    },
+    "imageUrl": "/images/1753731583939.jpg"
+  },
+  {
+    "id": 1753731786967,
+    "name": "Koszulka Dragon King (M)",
+    "description": "Dragon King",
+    "categories": [
+      "Shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 4,
+      "M": 4,
+      "L": 0,
+      "XL": 0,
+      "XXL": 2
+    },
+    "imageUrl": "/images/1753731786965.jpg"
+  },
+  {
+    "id": 1753731872177,
+    "name": "Koszulka Dragon King (K)",
+    "description": "dragon king",
+    "categories": [
+      "Shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 2,
+      "5-6": 4,
+      "7-8": 5,
+      "9-11": 2,
+      "12-14": 5
+    },
+    "imageUrl": "/images/1753731872176.jpg"
+  },
+  {
+    "id": 1753782711865,
+    "name": "Koszulka Kraków Głowa Smoka (M)",
+    "description": "Głowa straszny",
+    "categories": [
+      "Shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 4,
+      "M": 1,
+      "L": 1,
+      "XL": 2,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753782711856.jpg"
+  },
+  {
+    "id": 1753782924260,
+    "name": "Koszulka Kraków Głowa Smoka (K)",
+    "description": "głowa straszny",
+    "categories": [
+      "Shirt",
+      "kids"
+    ],
+    "sizes": {
+      "1": 0,
+      "2": 0,
+      "3-4": 0,
+      "5-6": 0,
+      "7-8": 1,
+      "9-11": 0,
+      "12-14": 4
+    },
+    "imageUrl": "/images/1753782924258.jpg"
+  },
+  {
+    "id": 1753783341908,
+    "name": "Koszulka Kraków Kościół Mariacki (M)",
+    "description": "mariacki kosciol",
+    "categories": [
+      "Shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 5,
+      "M": 2,
+      "L": 2,
+      "XL": 0,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753783341905.jpg"
+  },
+  {
+    "id": 1753783590599,
+    "name": "Koszulka Kraków Napis (M)",
+    "description": "napis krakow",
+    "categories": [
+      "Shirt",
+      "adults"
+    ],
+    "sizes": {
+      "S": 3,
+      "M": 0,
+      "L": 2,
+      "XL": 1,
+      "XXL": 1
+    },
+    "imageUrl": "/images/1753783590593.png"
+  }
+]
