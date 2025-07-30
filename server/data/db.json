@@ -9,7 +9,7 @@
     "imageUrl": "/images/paszcza-A.png",
     "description": "Koszulka z grafiką smoka wawelskiego. 100% bawełna.",
     "sizes": {
-      "S": 6,
+      "S": 5,
       "M": 4,
       "L": 5,
       "XL": 4,
@@ -258,7 +258,7 @@
       "adults"
     ],
     "sizes": {
-      "S": 2,
+      "S": 1,
       "M": 1,
       "L": 2,
       "XL": 1,
@@ -279,8 +279,8 @@
       "2": 0,
       "3-4": 0,
       "5-6": 0,
-      "7-8": 0,
-      "9-11": 0,
+      "7-8": 2,
+      "9-11": 2,
       "12-14": 0
     },
     "imageUrl": "/images/1753714398317.jpg"
