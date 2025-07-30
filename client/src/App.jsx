@@ -1,44 +1,21 @@
 import { useState, useEffect } from 'react';
-import Item from './components/Item.jsx'
-import AddForm from './components/NewItemForm.jsx';
-import FilterItems from './components/FilterItems.jsx';
 
+import theme from './theme/theme';
+
+import { CssVarsProvider } from '@mui/joy/styles';
+import CssBaseline from '@mui/joy/CssBaseline';
+
+import InwentView from './views/InwentView';
+import Header from './components/Header';
 
 function App() {
-  const [allItems, setAllItems] = useState([])
-  const [items, setItems] = useState([])
 
-  useEffect(() => {
-    fetch('http://localhost:3001/api/items')
-      .then(res => res.json())
-      .then(data => {
-        setAllItems(data);
-        setItems(data)
-      });
-  }, []);
-
-
-
-  
-  function filteredItems(itm){
-    setItems(itm)
-  }
 
     return (
-       <div>
-        <FilterItems its={allItems} onDelay={filteredItems}></FilterItems>
-        {items.map((item) => (  
-          <Item
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            image={item.imageUrl}
-            sizes={item.sizes}
-          />
-          
-        ))}
-        <AddForm/>
-    </div>
+      <CssVarsProvider theme={theme} disableTransitionOnChange>
+          <Header />
+          <InwentView />
+      </CssVarsProvider>
   );
 }
 

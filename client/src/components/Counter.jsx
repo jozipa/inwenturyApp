@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Item.css';
+
 import { Card, CardContent } from '@mui/joy';
 import Typography from '@mui/joy/Typography';
 import CardActions from '@mui/joy/CardActions';
