@@ -11,7 +11,7 @@ import Chip from '@mui/joy/Chip';
 
 
 
-export default function Counter({ amount, size, onChange, sx = {} }) {
+export default function Counter({ amount, size, onChange}) {
   const [counter, setCounter] = useState(amount);
 
   const handleChange = (val) => {
@@ -21,73 +21,93 @@ export default function Counter({ amount, size, onChange, sx = {} }) {
 
   return (
 <Card
-      variant="solid"
-      color="primary"
-      invertedColors
-      size="sm"
+  variant="solid"
+  color="primary"
+  invertedColors
+  sx={{
+    p: 0,
+    width: 70,
+    minWidth: 20,
+    textAlign: "center",
+    display: 'flex',
+    flexDirection: 'column',
+    overflow: 'hidden', // <-- zapobiega przesunięciom
+  }}
+>
+  <Chip
+    variant="plain"
+    size="sm"
+    sx={{
+      position: "absolute",
+      top: -10,
+      left: "50%",
+      transform: "translateX(-50%)",
+      borderRadius: "md",
+      px: 2,
+      color: 'text.primary',
+      bgcolor: 'inherit',
+      border: '2px solid',
+      borderColor: 'common.white',
+      zIndex: 2
+    }}
+  >
+    {size}
+  </Chip>
+
+  <CardContent
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      border: "1px solid",
+      borderColor: "black",
+      flex: 1,
+      m: 0,
+      p: 0.5,
+      minHeight: 0, // <-- to pomaga w niektórych przypadkach
+    }}
+  >
+    <Typography
       sx={{
-        p: 0.5,
-        width: 80,
-        minWidth: 70,
-        textAlign: "center",
-        ...sx, // pozwala nadpisywać styl z zewnątrz
+        m: 0,
+        p: 0,
+        lineHeight: 1,
       }}
+      level="body-lg"
+      fontWeight={600}
     >
-      <Chip
-        variant="plain"
-        size="sm"
-        sx={{
-          position: "absolute",
-          top: -10,
-          left: "50%",
-          transform: "translateX(-50%)",
-          borderRadius: "md",
-          px: 2,
-          color: 'text.primary',
-          bgcolor: 'inherit',
-          border: '2px solid',
-          borderColor: 'common.white',
-        }}
-      >
-        {size}
-      </Chip>
+      {counter}
+    </Typography>
+  </CardContent>
 
-
-      <CardContent
-        sx={{
-          pt: 1,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Typography level="body-lg" fontWeight={600}>
-          {counter}
-        </Typography>
-      </CardContent>
-
-      <CardActions
-        sx={{
-          justifyContent: "center",
-          gap: 0.5,
-          p: 0.5,
-        }}
-      >
-        <IconButton
-          size="sm"
-          variant="soft"
-          onClick={() => handleChange(counter - 1)}
-        >
-          <Remove fontSize="small" />
-        </IconButton>
-        <IconButton
-          size="sm"
-          variant="solid"
-          onClick={() => handleChange(counter + 1)}
-        >
-          <Add fontSize="small" />
-        </IconButton>
-      </CardActions>
-    </Card>
+  <CardActions
+    sx={{
+      justifyContent: "center",
+      gap: 0.5,
+      m: 0,
+      p: 0,
+      border: "1px solid",
+      borderColor: "black",
+      height: "auto",
+    }}
+  >
+    <IconButton
+      size="xs"
+      sx={{ p: 0.5 }}
+      variant="soft"
+      onClick={() => handleChange(counter - 1)}
+    >
+      <Remove fontSize="sm" />
+    </IconButton>
+    <IconButton
+      size="xs"
+      sx={{ p: 0.5 }}
+      variant="solid"
+      onClick={() => handleChange(counter + 1)}
+    >
+      <Add fontSize="sm" />
+    </IconButton>
+  </CardActions>
+</Card>
   );
 }

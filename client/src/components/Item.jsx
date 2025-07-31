@@ -1,19 +1,24 @@
 import { useState } from 'react';
 import Counter from './Counter'; 
 const API_URL = import.meta.env.VITE_API_URL;
-import { Card, CardContent, Typography, Box, Button, AspectRatio, CardOverflow } from '@mui/joy';
+import { Card, CardContent, Typography, Box, Button, AspectRatio, CardOverflow, Snackbar } from '@mui/joy';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import Badge from '@mui/joy/Badge';
+
 
 export default function Item({ id ,name, image, count = {}, type }) {
   const [updated, setUpdated] = useState(count);
-
-  console.log(count);
-  
+  const [snackOpen, setSnackOpen] = useState(false)
+  const [snackMessage, setSnackMessage] = useState(null)
+  const [ifChanged, setIfChanged] = useState(true)
 
   function handleCounterChange(size, count) {
     setUpdated(prev => ({
       ...prev,
       [size]: count
     }));
+    setIfChanged(false)
   }
 
   function handlePatch(){
@@ -29,11 +34,22 @@ export default function Item({ id ,name, image, count = {}, type }) {
     })
       .then(res => res.json())
       .then(data => {
-        console.log('Zaktualizowano rozmiary:', data);
+        console.log('Pomyślnie zaktualizowano element', data);
+        let el = JSON.stringify(data.item.id)
+        setSnackMessage(`Pomyślnie zaktualizowano produkt o id: ${el}`)
+        setIfChanged(true)
+        handleSnack()
       })
       .catch(err => {
         console.error('Błąd aktualizacji:', err);
       });
+  }
+
+  function handleSnack(){
+    setSnackOpen(true)
+    setTimeout(() => {
+      setSnackOpen(false)
+    }, 2000);
   }
 
   return (
@@ -49,23 +65,41 @@ export default function Item({ id ,name, image, count = {}, type }) {
         p: 0,
         overflow: "hidden",
         borderRadius: "lg",
-        height: { xs: 'auto', md: 180 },
+        height: { xs: 'auto', md: '180' },
       }}
     >
+      <Snackbar
+        anchorOrigin={{horizontal: "center", vertical: "top"}}
+        autoHideDuration={2000}
+        color="success"
+        variant="solid"
+        open={snackOpen}
+        startDecorator={<CheckCircleIcon />}
+      >
+        {snackMessage}
+      </Snackbar>
       <CardOverflow
         sx={{
           flexShrink: 0,
-          width: { xs: '100%', md: 200 },
+          width: { xs: '100%', md: 'auto' },
+          height: { xs: 'auto', md: 180 }, // <-- kluczowe
+          aspectRatio: { xs: '1', md: 'auto' },
+          display: 'flex',
+          alignItems: 'stretch',
+          border: "1px solid",
+          borderBlockColor: "black"
         }}
       >
-        <AspectRatio ratio={1} sx={{ width: '100%', height: '100%', minHeight: 200 }}>
-          <img
-            src={`${API_URL}${image}`}
-            alt={name}
-            loading="lazy"
-            style={{ objectFit: 'cover' }}
-          />
-        </AspectRatio>
+        <Box
+          component="img"
+          src={`${API_URL}${image}`}
+          alt={name}
+          sx={{
+            objectFit: 'cover',
+            height: '100%',
+            width: 'auto',
+          }}
+        />
       </CardOverflow>
 
       <CardContent
@@ -74,8 +108,8 @@ export default function Item({ id ,name, image, count = {}, type }) {
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
-          px: 2,
-          py: 1.5,
+          alignItems: 'stretch',
+          p: 0
         }}
       >
         <Box
@@ -83,37 +117,49 @@ export default function Item({ id ,name, image, count = {}, type }) {
             display: 'flex',
             flexDirection: { xs: 'column', sm: 'row' },
             justifyContent: 'space-between',
-            alignItems: { xs: 'flex-start', sm: 'center' },
+            alignItems: 'center',
             gap: 1,
-            mb: 2,
+            mb: 0,
+            flexWrap: 'wrap',
+             border: "1px solid",
+            borderBlockColor: "black",
+            height: '50px',
+            width: '100%'
           }}
         >
           <Typography
             level="h4"
+            noWrap
             sx={{
-              fontWeight: 700,
-              fontSize: { xs: '1.1rem', sm: '1.3rem', md: '1.5rem' },
+              fontWeight: 600,
+              fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.3rem' },
               flex: 1,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
             }}
           >
             {name}
           </Typography>
-
-          <Button
-            size="sm"
-            onClick={handlePatch}
-            sx={{ whiteSpace: 'nowrap' }}
-          >
-            Zatwierdź zmiany
-          </Button>
+          <Badge badgeContent="!" invisible={ifChanged}>
+            <Button
+              size="sm"
+              onClick={handlePatch}
+              sx={{ whiteSpace: 'nowrap' }}
+            >
+              Zatwierdź zmiany
+            </Button>
+          </Badge>
         </Box>
-
         <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
             gap: 1.5,
             alignItems: "center",
+            border: "1px solid",
+            borderBlockColor: "black",
+            height: "100%"
           }}
         >
           {Object.entries(count).map(([count, quantity]) => (
@@ -122,7 +168,10 @@ export default function Item({ id ,name, image, count = {}, type }) {
               size={count}
               amount={quantity}
               onChange={handleCounterChange}
-              sx={{ minWidth: 70, maxWidth: 90 }}
+              sx={{
+                flex: '1 0 60px',
+                maxWidth: '80px',
+              }}
             />
           ))}
         </Box>

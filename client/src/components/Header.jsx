@@ -12,17 +12,13 @@ import Avatar from '@mui/joy/Avatar';
 
 
 
-export default function Header() {
-    const [open, setOpen] = useState(false)
+export default function Header({ onToggleSidebar }) {
 
-    function handleDrawer(status){
-       setOpen(!status) 
-    }
+ 
 
   return (
     <Card 
       variant='plain' 
-      borderRadius='none' 
       sx={{
         width: "100%", 
         height: "70px", 
@@ -32,8 +28,11 @@ export default function Header() {
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         gap: 1,
+        borderBottom: '1px solid',
+        borderColor: 'divider',
+        bgcolor: '#f5f7fa',
       }}>
-        <IconButton sx={{width: "40px"}} onClick={() => {handleDrawer(open)}}>
+        <IconButton sx={{width: "40px"}} onClick={onToggleSidebar}>
             <Menu />
         </IconButton>
         <Avatar />

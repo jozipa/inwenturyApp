@@ -44,52 +44,32 @@ function InwentView() {
     return (
       <React.Fragment>
         <CssBaseline />
-        <Box sx={{ display: 'flex', minHeight: '100dvh' }}>
+        <Box sx={{ display: 'flex', minHeight: '100dvh', overflow: 'hidden' }}>
           <Box
             component="main"
             className="MainContent"
             sx={{
-              px: { xs: 2, md: 6 },
+              px: { xs: 2, md: 4 },
               pt: 0,
               pb: { xs: 2, sm: 2, md: 3 },
               flex: 1,
               display: 'flex',
               flexDirection: 'column',
-              minWidth: 0,
+              minWidth: "80vw",
+              width: "auto",
               height: '100dvh',
               gap: 1,
+              bgcolor: '#f5f7fa',
+              border: '1px solid',
+              borderColor: 'divider',
+              
             }}
           >
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Breadcrumbs
-                size="sm"
-                aria-label="breadcrumbs"
-                separator={<ChevronRightRoundedIcon fontSize="sm" />}
-                sx={{ pl: 0 }}
-              >
-                <Link
-                  underline="none"
-                  color="neutral"
-                  href="#some-link"
-                  aria-label="Home"
-                >
-                  <HomeRoundedIcon />
-                </Link>
-                <Link
-                  underline="hover"
-                  color="neutral"
-                  href="#some-link"
-                  sx={{ fontSize: 12, fontWeight: 500 }}
-                >
-                  
-                </Link>
-                
-              </Breadcrumbs>
-            </Box>
             <Box
               sx={{
                 display: 'flex',
                 mb: 1,
+                mt: 1,
                 gap: 1,
                 flexDirection: { xs: 'column', sm: 'row' },
                 alignItems: { xs: 'start', sm: 'center' },
@@ -109,20 +89,22 @@ function InwentView() {
               </Button>
             </Box>
 
-              <Box>
+             
                 <FilterItems its={allItems} onDelay={filteredItems}></FilterItems>
-                {items.map((item) => (  
-                  <Item
-                    key={item.id}
-                    id={item.id}
-                    name={item.name}
-                    image={item.imageUrl}
-                    count={item.count}
-                    type={item.type}
-                  />
-                ))}
-                <AddForm/>
-            </Box>
+                <Box sx={{overflowY: 'auto'}}>
+                  {items.map((item) => (  
+                    <Item
+                      key={item.id}
+                      id={item.id}
+                      name={item.name}
+                      image={item.imageUrl}
+                      count={item.count}
+                      type={item.type}
+                    />
+                  ))}
+                </Box>
+            
+               
             
           </Box>
         </Box>
