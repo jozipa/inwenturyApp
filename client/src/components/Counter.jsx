@@ -6,6 +6,8 @@ import CardActions from '@mui/joy/CardActions';
 import Add from '@mui/icons-material/Add';
 import Remove from '@mui/icons-material/Remove';
 
+import {Box} from '@mui/joy';
+
 import IconButton from '@mui/joy/IconButton';
 import Chip from '@mui/joy/Chip';
 
@@ -24,15 +26,20 @@ export default function Counter({ amount, size, onChange}) {
   variant="solid"
   color="primary"
   invertedColors
-  sx={{
-    p: 0,
-    width: 70,
-    minWidth: 20,
-    textAlign: "center",
-    display: 'flex',
-    flexDirection: 'column',
-    overflow: 'hidden', // <-- zapobiega przesunięciom
-  }}
+ sx={{
+  p: 0,
+  m: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 0, // <-- kluczowe
+  '--Card-padding': '0px',
+  '--Card-radius': '0px',
+  '--CardChild-radius': '0px',
+  '--Card-gap': '0px',
+  '--CardOverflow-offset': '0px',
+  '--variant-borderWidth': '0px',
+  overflow: 'hidden',
+}}
 >
   <Chip
     variant="plain"
@@ -54,7 +61,7 @@ export default function Counter({ amount, size, onChange}) {
     {size}
   </Chip>
 
-  <CardContent
+  <Box
     sx={{
       display: "flex",
       justifyContent: "center",
@@ -78,9 +85,9 @@ export default function Counter({ amount, size, onChange}) {
     >
       {counter}
     </Typography>
-  </CardContent>
+  </Box>
 
-  <CardActions
+  <Box
     sx={{
       justifyContent: "center",
       gap: 0.5,
@@ -107,7 +114,7 @@ export default function Counter({ amount, size, onChange}) {
     >
       <Add fontSize="sm" />
     </IconButton>
-  </CardActions>
+  </Box>
 </Card>
   );
 }
