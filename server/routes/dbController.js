@@ -39,8 +39,9 @@ router.post('/', upload.single('image'), (req, res) => {
     id: Date.now(),
     name: body.name,
     description: body.description,
+    type: body.type,
     categories: catArr,
-    sizes: JSON.parse(body.sizes),
+    count: JSON.parse(body.count),
     imageUrl: req.file ? `/images/${req.file.filename}` : '', 
   };
 
@@ -59,7 +60,7 @@ router.patch('/', (req, res) => {
     return res.status(404).json({ message: 'Nie znaleziono produktu o takim id' });
   }
 
-  data[index].sizes = newItem.sizes;
+  data[index].count = newItem.count;
 
   fs.writeFileSync(dbPath, JSON.stringify(data, null, 2));
   res.status(201).json({ message: 'Zaktualizowano koszulkę!', item: newItem });

@@ -3,8 +3,11 @@ import Counter from './Counter';
 const API_URL = import.meta.env.VITE_API_URL;
 import { Card, CardContent, Typography, Box, Button, AspectRatio, CardOverflow } from '@mui/joy';
 
-export default function Item({ id ,name, image, sizes = {} }) {
-  const [updated, setUpdated] = useState(sizes);
+export default function Item({ id ,name, image, count = {}, type }) {
+  const [updated, setUpdated] = useState(count);
+
+  console.log(count);
+  
 
   function handleCounterChange(size, count) {
     setUpdated(prev => ({
@@ -21,7 +24,7 @@ export default function Item({ id ,name, image, sizes = {} }) {
       },
       body: JSON.stringify({ 
         id: id,
-        sizes: updated 
+        count: updated 
       })
     })
       .then(res => res.json())
@@ -113,10 +116,10 @@ export default function Item({ id ,name, image, sizes = {} }) {
             alignItems: "center",
           }}
         >
-          {Object.entries(sizes).map(([size, quantity]) => (
+          {Object.entries(count).map(([count, quantity]) => (
             <Counter
-              key={size}
-              size={size}
+              key={count}
+              size={count}
               amount={quantity}
               onChange={handleCounterChange}
               sx={{ minWidth: 70, maxWidth: 90 }}

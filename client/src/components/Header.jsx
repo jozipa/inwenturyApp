@@ -8,6 +8,7 @@ import CardActions from '@mui/joy/CardActions';
 
 import IconButton from '@mui/joy/IconButton';
 import Menu from '@mui/icons-material/Menu';
+import Avatar from '@mui/joy/Avatar';
 
 
 
@@ -19,20 +20,23 @@ export default function Header() {
     }
 
   return (
-    <Card variant='plain' borderRadius='none' sx={{width: "100%", height: "70px", m: 0}}>
+    <Card 
+      variant='plain' 
+      borderRadius='none' 
+      sx={{
+        width: "100%", 
+        height: "70px", 
+        m: 0, 
+        display: 'flex', 
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        gap: 1,
+      }}>
         <IconButton sx={{width: "40px"}} onClick={() => {handleDrawer(open)}}>
             <Menu />
         </IconButton>
-        <Drawer
-            anchor="left"
-            color="neutral"
-            invertedColors
-            size="md"
-            variant="plain"
-            open={open}
-            >
-            <Button onClick={() => {handleDrawer(open)}}>Wróć</Button>
-        </Drawer>
+        <Avatar />
     </Card>
   );
 }

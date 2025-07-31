@@ -9,7 +9,15 @@ export default function AddForm() {
   const [sizes, setSizes] = useState({});
   const [prname, setName] = useState("Nazwa");
   const [desc, setDesc] = useState("Opis");
-  const [imageFile, setImageFile] = useState(null); // <- nowość
+  const [imageFile, setImageFile] = useState(null); 
+  const [itemType, setItemType] = useState(null)
+
+
+  function handleType(cat){
+    
+  }
+  
+
 
   useEffect(() => {
     fetch('http://localhost:3001/api/categories')
@@ -22,13 +30,23 @@ export default function AddForm() {
 
     let categories = []
     categories.push(selectedCategory.name)
-    if (selectedSizeGroup) categories.push(selectedSizeGroup.name)
+    if (selectedSizeGroup) {
+      categories.push(selectedSizeGroup.name)
+    }
+
 
     const formData = new FormData(); // 👈 to ważne
     formData.append('name', prname);
     formData.append('description', desc);
+    formData.append('type', itemType);
     formData.append('categories', categories);
-    formData.append('sizes', JSON.stringify(sizes)); // rozmiary jako JSON
+
+    if(itemType=="multiple"){
+      formData.append('count', JSON.stringify(sizes)); // rozmiary jako JSON
+    } else {
+      formData.append('count', JSON.stringify({ilość: 0}))
+    }
+    
     if (imageFile) {
       formData.append('image', imageFile); // 👈 dodajesz obrazek
     }
@@ -53,6 +71,7 @@ export default function AddForm() {
       <select onChange={(e) => {
         const cat = categories.find(c => c.name === e.target.value);
         setSelectedCategory(cat);
+        setItemType(cat.kind)
         setSelectedSizeGroup(null);
       }}>
         <option value="">-- Wybierz kategorię --</option>
@@ -61,7 +80,7 @@ export default function AddForm() {
         ))}
       </select>
 
-      {selectedCategory?.type && (
+      {selectedCategory?.type && ( // jest multiple (tylko multiple ma type)
         <select onChange={(e) => {
           const sizesObj = selectedCategory.type.find(el => el.name === e.target.value);
           setSelectedSizeGroup(sizesObj);

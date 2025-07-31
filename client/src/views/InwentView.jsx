@@ -117,9 +117,9 @@ function InwentView() {
                     id={item.id}
                     name={item.name}
                     image={item.imageUrl}
-                    sizes={item.sizes}
+                    count={item.count}
+                    type={item.type}
                   />
-                  
                 ))}
                 <AddForm/>
             </Box>

@@ -2,13 +2,14 @@
   {
     "id": 1,
     "name": "Koszulka Kraków Smok Paszcza (M)",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
     "imageUrl": "/images/paszcza-A.png",
     "description": "Koszulka z grafiką smoka wawelskiego. 100% bawełna.",
-    "sizes": {
+    "count": {
       "S": 5,
       "M": 4,
       "L": 5,
@@ -20,18 +21,19 @@
     "id": 1753701586482,
     "name": "Koszulka Kraków Smocza Paszcza (K)",
     "description": "smok paszcza",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 3,
-      "5-6": 3,
+      "5-6": 2,
       "7-8": 1,
       "9-11": 1,
-      "12-14": 1
+      "12-14": 0
     },
     "imageUrl": "/images/1753701586474.jpg"
   },
@@ -39,11 +41,12 @@
     "id": 1753701822572,
     "name": "Koszulka Kraków City Jurajski (M)",
     "description": "Dorosły",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 0,
       "M": 3,
       "L": 2,
@@ -56,18 +59,19 @@
     "id": 1753701879386,
     "name": "Koszulka Kraków City Jurajski (K)",
     "description": "Dzeci",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 2,
       "5-6": 2,
       "7-8": 3,
       "9-11": 3,
-      "12-14": 3
+      "12-14": 2
     },
     "imageUrl": "/images/1753701879383.jpg"
   },
@@ -75,11 +79,12 @@
     "id": 1753703007554,
     "name": "Koszulka Kraków Smok Skorupa (K)",
     "description": "Skorupa",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 3,
       "2": 2,
       "3-4": 1,
@@ -94,11 +99,12 @@
     "id": 1753703589934,
     "name": "Koszulka I LOVE KRAKÓW (M)",
     "description": "love",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 2,
       "M": 2,
       "L": 3,
@@ -111,11 +117,12 @@
     "id": 1753703837740,
     "name": "Koszulka Smok Ognisty MK (M)",
     "description": "mortal combat",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 2,
       "M": 2,
       "L": 1,
@@ -128,11 +135,12 @@
     "id": 1753703871235,
     "name": "Koszulka Smok Ognisty MK (K)",
     "description": "mortal combat",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 3,
@@ -147,11 +155,12 @@
     "id": 1753705854718,
     "name": "Koszulka Kraków Smok Forever (M)",
     "description": "forever",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 4,
       "M": 3,
       "L": 2,
@@ -164,11 +173,12 @@
     "id": 1753706150783,
     "name": "Koszulka Kraków Smok Forever (K)",
     "description": "forever",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 0,
@@ -183,11 +193,12 @@
     "id": 1753708497551,
     "name": "Koszulka Kraków Retro Kolor (M)",
     "description": "retro",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 3,
       "M": 5,
       "L": 0,
@@ -200,11 +211,12 @@
     "id": 1753713139018,
     "name": "Koszulka Kraków Kolory CMYK (M)",
     "description": "cmyk",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 1,
       "M": 0,
       "L": 0,
@@ -217,11 +229,12 @@
     "id": 1753713190469,
     "name": "Koszulka Kraków Kolory CMYK (K)",
     "description": "cmyk",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 2,
@@ -236,11 +249,12 @@
     "id": 1753713242501,
     "name": "Koszulka Cracow Kolory CMYK (M)",
     "description": "cmyk",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 1,
       "M": 1,
       "L": 3,
@@ -253,11 +267,12 @@
     "id": 1753714348287,
     "name": "Koszulka Kraków Kościół Mariacki (M)",
     "description": "mariacki",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 1,
       "M": 1,
       "L": 2,
@@ -270,11 +285,12 @@
     "id": 1753714398319,
     "name": "Koszulka Kraków Kościół Mariacki (K)",
     "description": "mariacki",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 0,
@@ -289,11 +305,12 @@
     "id": 1753714715193,
     "name": "Koszulka Kraków Sukiennice Mono (M)",
     "description": "sukiennice",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 2,
       "M": 1,
       "L": 1,
@@ -306,11 +323,12 @@
     "id": 1753715020271,
     "name": "Koszulka Kraków Symbole (M)",
     "description": "symbole",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 1,
       "M": 0,
       "L": 3,
@@ -323,11 +341,12 @@
     "id": 1753715373352,
     "name": "Koszulka Kraków Smok w Ogniu (M)",
     "description": "ogień",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 2,
       "M": 2,
       "L": 0,
@@ -340,11 +359,12 @@
     "id": 1753715479083,
     "name": "Koszulka Kraków Smok w Ogniu (K)",
     "description": "ogień",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 0,
@@ -359,11 +379,12 @@
     "id": 1753715876698,
     "name": "Koszulka Kraków Wawel Panorama Noc (M)",
     "description": "wawel",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 3,
       "M": 5,
       "L": 3,
@@ -376,11 +397,12 @@
     "id": 1753716483503,
     "name": "Koszulka Kraków Herb (K)",
     "description": "herb",
+    "type": "multiple",
     "categories": [
       "shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 3,
@@ -395,11 +417,12 @@
     "id": 1753716723206,
     "name": "Koszulka Kraków Herb (M)",
     "description": "Herb",
+    "type": "multiple",
     "categories": [
       "shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 3,
       "M": 4,
       "L": 4,
@@ -412,11 +435,12 @@
     "id": 1753731156185,
     "name": "Koszulka Kraków Moim Życiem (M)",
     "description": "życiem",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 1,
       "M": 2,
       "L": 1,
@@ -429,11 +453,12 @@
     "id": 1753731381112,
     "name": "Koszulka Kraków Wawel Noc (M)",
     "description": "Waw noc",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 3,
       "M": 3,
       "L": 1,
@@ -446,11 +471,12 @@
     "id": 1753731583941,
     "name": "Koszulka Kraków Pieczęć (M)",
     "description": "Pieczęć",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 4,
       "M": 1,
       "L": 3,
@@ -463,11 +489,12 @@
     "id": 1753731786967,
     "name": "Koszulka Dragon King (M)",
     "description": "Dragon King",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 4,
       "M": 4,
       "L": 0,
@@ -480,11 +507,12 @@
     "id": 1753731872177,
     "name": "Koszulka Dragon King (K)",
     "description": "dragon king",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 2,
@@ -499,11 +527,12 @@
     "id": 1753782711865,
     "name": "Koszulka Kraków Głowa Smoka (M)",
     "description": "Głowa straszny",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 4,
       "M": 1,
       "L": 1,
@@ -516,11 +545,12 @@
     "id": 1753782924260,
     "name": "Koszulka Kraków Głowa Smoka (K)",
     "description": "głowa straszny",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 0,
@@ -535,11 +565,12 @@
     "id": 1753783341908,
     "name": "Koszulka Kraków Kościół Mariacki (M)",
     "description": "mariacki kosciol",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 5,
       "M": 2,
       "L": 2,
@@ -552,11 +583,12 @@
     "id": 1753783590599,
     "name": "Koszulka Kraków Napis (M)",
     "description": "napis krakow",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 3,
       "M": 0,
       "L": 2,
@@ -569,11 +601,12 @@
     "id": 1753900183122,
     "name": "Koszulka Smok Żongluje Różowy (K) ",
     "description": "rozowy zongluje",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 6,
       "2": 2,
       "3-4": 3,
@@ -588,11 +621,12 @@
     "id": 1753900385555,
     "name": "Koszulka Smok Żongluje Żółty(K)",
     "description": "zongluje zolty",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 4,
       "2": 2,
       "3-4": 2,
@@ -607,11 +641,12 @@
     "id": 1753900684503,
     "name": "Koszulka Smok Żongluje Niebieski(K)",
     "description": "zongluje smok ",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 2,
       "2": 0,
       "3-4": 0,
@@ -626,11 +661,12 @@
     "id": 1753900910599,
     "name": "Koszulka Kraków Dragon Princess Żółty (K)",
     "description": "princess ksiezniczka zolty",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 4,
       "2": 2,
       "3-4": 2,
@@ -645,11 +681,12 @@
     "id": 1753901115523,
     "name": "Koszulka Kraków Dragon Princess Biały (K)",
     "description": "ksiezniczka bialy",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 0,
@@ -664,11 +701,12 @@
     "id": 1753901194067,
     "name": "Koszulka Kraków Dragon Princess (K)",
     "description": "ksiezniczka rozowy",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 0,
@@ -683,11 +721,12 @@
     "id": 1753901279042,
     "name": "Koszulka Kraków Dragon Princess Czerwony (K)",
     "description": "ksiezniczka czerwony",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 3,
       "2": 1,
       "3-4": 4,
@@ -702,11 +741,12 @@
     "id": 1753901568718,
     "name": "Koszulka Kraków Królewna (K)",
     "description": "krolewna dzieci",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 2,
       "2": 4,
       "3-4": 0,
@@ -721,11 +761,12 @@
     "id": 1753901798209,
     "name": "Koszulka Łowicz Serce PL Różowa (K)",
     "description": "Lowicz serce",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 1,
       "2": 1,
       "3-4": 4,
@@ -740,11 +781,12 @@
     "id": 1753901983002,
     "name": "Koszulka Łowicz Serce PL Biały (K)",
     "description": "lowicz dzieci bialy",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 2,
@@ -759,11 +801,12 @@
     "id": 1753902424549,
     "name": "Koszulka Kraków Smok Junior (K)",
     "description": "junior dzieci bialy biały",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 1,
@@ -778,11 +821,12 @@
     "id": 1753902710051,
     "name": "Koszulka Kraków Kolory CMYK Biały (K)",
     "description": "cmyk kolory bialy ",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 5,
@@ -797,11 +841,12 @@
     "id": 1753902901902,
     "name": "Koszulka Kraków Smok Zombie (K)",
     "description": "zombi rozowy fioletowy ",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 2,
       "2": 2,
       "3-4": 2,
@@ -816,11 +861,12 @@
     "id": 1753903102503,
     "name": "Koszulka Smok Free Style (K)",
     "description": "free style czerwony swag barbakan",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 2,
       "2": 2,
       "3-4": 1,
@@ -835,11 +881,12 @@
     "id": 1753903352670,
     "name": "Koszulka Smok Heroes (K)",
     "description": "Superbohater hero sukiennice cracow",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 2,
       "2": 2,
       "3-4": 3,
@@ -854,11 +901,12 @@
     "id": 1753903578872,
     "name": "Koszulka Kraków Skrzydlaty Smok (K)",
     "description": "smo krakow wawel chmury lata",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 2,
       "2": 2,
       "3-4": 2,
@@ -873,11 +921,12 @@
     "id": 1753904388218,
     "name": "Koszulka Polska Orzeł (K)",
     "description": "orzel polska dzieci czarny",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "kids"
     ],
-    "sizes": {
+    "count": {
       "1": 0,
       "2": 0,
       "3-4": 5,
@@ -892,11 +941,12 @@
     "id": 1753905380417,
     "name": "Koszulka Polska Orzeł (M)",
     "description": "orzeł polska czarny dorosly",
+    "type": "multiple",
     "categories": [
       "Shirt",
       "adults"
     ],
-    "sizes": {
+    "count": {
       "S": 3,
       "M": 1,
       "L": 1,
@@ -904,5 +954,36 @@
       "XXL": 1
     },
     "imageUrl": "/images/1753905380415.png"
+  },
+  {
+    "id": 1753961910182,
+    "name": "Koszulka Polska Orzeł dl (M)",
+    "description": "orzel szary koszulka",
+    "type": "multiple",
+    "categories": [
+      "Shirt",
+      "adults"
+    ],
+    "count": {
+      "S": 2,
+      "M": 2,
+      "L": 0,
+      "XL": 0,
+      "XXL": 0
+    },
+    "imageUrl": "/images/1753961910175.png"
+  },
+  {
+    "id": 1753964044161,
+    "name": "Torba eko Kraków Gołąb Turysta, natural",
+    "description": "golab bialy ai",
+    "type": "single",
+    "categories": [
+      "Bag"
+    ],
+    "count": {
+      "ilość": 4
+    },
+    "imageUrl": "/images/1753964044154.jpg"
   }
 ]
