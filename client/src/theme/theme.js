@@ -4,7 +4,9 @@ const theme = extendTheme({
   breakpoints: {
     values: {
       xs: 0,
+      xsm: 300,
       sm: 600,
+      cardChange: 700,
       smd: 750,   
       md: 900,
       lg: 1200,

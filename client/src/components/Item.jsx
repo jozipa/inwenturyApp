@@ -57,17 +57,19 @@ export default function Item({ id ,name, image, count = {}, type }) {
       variant="outlined"
       sx={{
         display: "flex",
-        flexDirection: { xs: "column", md: "row" },
+        flexDirection: { xs: "column", cardChange: "row" },
         alignItems: "stretch",
-        maxWidth: 1000,
+        maxWidth: 1600,
         mx: "auto",
         my: 2,
         p: 0,
+        gap: 0,
         overflow: "hidden",
         borderRadius: "lg",
-        height: { xs: 'auto', md: '180' },
+        height: { xs: 'auto', cardChange: '180' },
       }}
     >
+
       <Snackbar
         anchorOrigin={{horizontal: "center", vertical: "top"}}
         autoHideDuration={2000}
@@ -81,13 +83,11 @@ export default function Item({ id ,name, image, count = {}, type }) {
       <CardOverflow
         sx={{
           flexShrink: 0,
-          width: { xs: '100%', md: 'auto' },
-          height: { xs: 'auto', md: 180 }, // <-- kluczowe
-          aspectRatio: { xs: '1', md: 'auto' },
+          width: { xs: '100%', cardChange: 'auto' },
+          height: { xs: 'auto', cardChange: 180 }, // <-- kluczowe
+          aspectRatio: { xs: '1', cardChange: 'auto' },
           display: 'flex',
           alignItems: 'stretch',
-          border: "1px solid",
-          borderBlockColor: "black"
         }}
       >
         <Box
@@ -115,30 +115,32 @@ export default function Item({ id ,name, image, count = {}, type }) {
         <Box
           sx={{
             display: 'flex',
-            flexDirection: { xs: 'column', sm: 'row' },
+            flexDirection: { xs: 'column', cardChange: 'row' },
             justifyContent: 'space-between',
             alignItems: 'center',
             gap: 1,
             mb: 0,
+            pr: 1.5,
+            pt: 1.5,
+            pb: 1.5,
             flexWrap: 'wrap',
-             border: "1px solid",
-            borderBlockColor: "black",
             height: '50px',
             width: '100%'
           }}
         >
-          <Typography
-            level="h4"
-            noWrap
-            sx={{
-              fontWeight: 600,
-              fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.3rem' },
-              flex: 1,
+        <Typography
+          level="h4"
+          sx={theme => ({
+            fontWeight: 600,
+            fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.3rem' },
+            flex: 1,
+            [theme.breakpoints.up('cardChange')]: {
               overflow: 'hidden',
               textOverflow: 'ellipsis',
               whiteSpace: 'nowrap',
-            }}
-          >
+            },
+          })}
+        >
             {name}
           </Typography>
           <Badge badgeContent="!" invisible={ifChanged}>
@@ -157,9 +159,8 @@ export default function Item({ id ,name, image, count = {}, type }) {
             flexWrap: "wrap",
             gap: 1.5,
             alignItems: "center",
-            border: "1px solid",
-            borderBlockColor: "black",
-            height: "100%"
+            height: "100%",
+            mt: 0.5
           }}
         >
           {Object.entries(count).map(([count, quantity]) => (
@@ -176,6 +177,7 @@ export default function Item({ id ,name, image, count = {}, type }) {
           ))}
         </Box>
       </CardContent>
+
     </Card>
   );
 }

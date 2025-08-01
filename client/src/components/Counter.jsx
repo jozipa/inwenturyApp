@@ -22,25 +22,18 @@ export default function Counter({ amount, size, onChange}) {
   };
 
   return (
-<Card
-  variant="solid"
-  color="primary"
-  invertedColors
- sx={{
-  p: 0,
-  m: 0,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: 0, // <-- kluczowe
-  '--Card-padding': '0px',
-  '--Card-radius': '0px',
-  '--CardChild-radius': '0px',
-  '--Card-gap': '0px',
-  '--CardOverflow-offset': '0px',
-  '--variant-borderWidth': '0px',
-  overflow: 'hidden',
-}}
->
+    <Card
+      variant="solid"
+      color="primary"
+      invertedColors
+      sx={{
+        p: 0,
+        m: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 0, // <-- kluczowe
+      }}
+    >
   <Chip
     variant="plain"
     size="sm"
@@ -66,12 +59,10 @@ export default function Counter({ amount, size, onChange}) {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      border: "1px solid",
-      borderColor: "black",
       flex: 1,
-      m: 0,
+      mt: 1,
       p: 0.5,
-      minHeight: 0, // <-- to pomaga w niektórych przypadkach
+      pt: 0.7,
     }}
   >
     <Typography
@@ -87,20 +78,19 @@ export default function Counter({ amount, size, onChange}) {
     </Typography>
   </Box>
 
-  <Box
+  <CardActions
     sx={{
       justifyContent: "center",
       gap: 0.5,
       m: 0,
-      p: 0,
-      border: "1px solid",
-      borderColor: "black",
+      px: 0.5,
+      pb: 0.5,
       height: "auto",
     }}
   >
     <IconButton
       size="xs"
-      sx={{ p: 0.5 }}
+      sx={{ p: 0.8 }}
       variant="soft"
       onClick={() => handleChange(counter - 1)}
     >
@@ -108,13 +98,13 @@ export default function Counter({ amount, size, onChange}) {
     </IconButton>
     <IconButton
       size="xs"
-      sx={{ p: 0.5 }}
+      sx={{ p: 0.8 }}
       variant="solid"
       onClick={() => handleChange(counter + 1)}
     >
       <Add fontSize="sm" />
     </IconButton>
-  </Box>
+  </CardActions>
 </Card>
   );
 }

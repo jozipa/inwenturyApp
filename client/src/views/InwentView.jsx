@@ -55,14 +55,12 @@ function InwentView() {
               flex: 1,
               display: 'flex',
               flexDirection: 'column',
-              minWidth: "80vw",
-              width: "auto",
+              width: "100%",
               height: '100dvh',
               gap: 1,
               bgcolor: '#f5f7fa',
               border: '1px solid',
               borderColor: 'divider',
-              
             }}
           >
             <Box
@@ -71,8 +69,8 @@ function InwentView() {
                 mb: 1,
                 mt: 1,
                 gap: 1,
-                flexDirection: { xs: 'column', sm: 'row' },
-                alignItems: { xs: 'start', sm: 'center' },
+                flexDirection: { xs: 'column', xsm: 'row' },
+                alignItems: { xs: 'start', xsm: 'center' },
                 flexWrap: 'wrap',
                 justifyContent: 'space-between',
               }}
