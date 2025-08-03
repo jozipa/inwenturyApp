@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { Outlet, Link as RouterLink } from 'react-router-dom';
+
 import {
   Box,
   List,
@@ -7,108 +8,82 @@ import {
   ListItemButton,
   ListItemDecorator,
   Typography,
-  Divider
+  Divider,
+  Sheet
 } from '@mui/joy';
+
+
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SettingsIcon from '@mui/icons-material/Settings';
-import LogoutIcon from '@mui/icons-material/Logout';
 
 
 
 
-export default function Sidebar({naviFor, naviInvrt}) {
+
+export default function Sidebar() {
     
 
   return (
-    <Box
-
+    <Sheet
+      variant="outlined"
       sx={{
-        width: '20%',
+        width: {
+          xs: '100%',     // pełna szerokość na bardzo małych ekranach (do Drawer)
+          sm: 220,        // małe ekrany
+          md: 260,        // średnie ekrany
+          lg: 280,        // większe ekrany
+        },
         height: '100vh',
-        bgcolor: 'neutral.100',
-        borderRight: '1px solid',
-        borderColor: 'divider',
         p: 2,
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
+        borderRight: '1px solid',
+        borderColor: 'divider',
+        bgcolor: 'background.body',
       }}
     >
-      <Typography level="h4" mb={2}>
-        Panel
+      {/* Logo / nazwa */}
+      <Typography level="h4" textAlign="center" mb={2}>
+        Grodzka 29
       </Typography>
 
+      {/* Lista linków */}
       <List
         size="lg"
-        variant="plain"
         sx={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 1
+          '--ListItem-radius': '8px',
+          '--List-gap': '4px',
+          flexGrow: 1,
         }}
       >
-       <ListItem>
-  <ListItemButton
-    onClick={naviInvrt}
-    sx={{
-      borderRadius: 'md',
-      justifyContent: 'flex-start',
-      px: 2,
-      '&:hover': {
-        bgcolor: '#e1e7f0',
-        cursor: 'pointer',
-      },
-    }}
-  >
-    <ListItemDecorator>
-      <DashboardIcon />
-    </ListItemDecorator>
-    <Typography level="body-md">Inwentaryzacja</Typography>
-  </ListItemButton>
-</ListItem>
+        <ListItem>
+          <ListItemButton component={RouterLink} to="/inventory">
+            <ListItemDecorator>
+              <DashboardIcon />
+            </ListItemDecorator>
+            Inwentaryzacja
+          </ListItemButton>
+        </ListItem>
 
-<ListItem>
-  <ListItemButton
-    onClick={naviFor}
-    sx={{
-      borderRadius: 'md',
-      justifyContent: 'flex-start',
-      px: 2,
-      '&:hover': {
-        bgcolor: '#e1e7f0',
-        cursor: 'pointer',
-      },
-    }}
-  >
-    <ListItemDecorator>
-      <AddBoxIcon />
-    </ListItemDecorator>
-    <Typography level="body-md">Dodaj produkt</Typography>
-  </ListItemButton>
-</ListItem>
+        <ListItem>
+          <ListItemButton component={RouterLink} to="/newItem">
+            <ListItemDecorator>
+              <AddBoxIcon />
+            </ListItemDecorator>
+            Dodaj produkt
+          </ListItemButton>
+        </ListItem>
 
-<ListItem>
-  <ListItemButton
-    sx={{
-      borderRadius: 'md',
-      justifyContent: 'flex-start',
-      px: 2,
-      '&:hover': {
-        bgcolor: '#e1e7f0',
-        cursor: 'pointer',
-      },
-    }}
-  >
-    <ListItemDecorator>
-      <SettingsIcon />
-    </ListItemDecorator>
-    <Typography level="body-md">Ustawienia</Typography>
-  </ListItemButton>
-</ListItem>
-        
+        <ListItem>
+          <ListItemButton component={RouterLink} to="/settings">
+            <ListItemDecorator>
+              <SettingsIcon />
+            </ListItemDecorator>
+            Ustawienia
+          </ListItemButton>
+        </ListItem>
       </List>
-    </Box>
+    </Sheet>
   );
 }

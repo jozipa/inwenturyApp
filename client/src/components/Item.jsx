@@ -7,7 +7,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import Badge from '@mui/joy/Badge';
 
 
-export default function Item({ id ,name, image, count = {}, type }) {
+export default function Item({ id ,name, image, count = {} }) {
   const [updated, setUpdated] = useState(count);
   const [snackOpen, setSnackOpen] = useState(false)
   const [snackMessage, setSnackMessage] = useState(null)
@@ -60,8 +60,8 @@ export default function Item({ id ,name, image, count = {}, type }) {
         flexDirection: { xs: "column", cardChange: "row" },
         alignItems: "stretch",
         maxWidth: 1600,
-        mx: "auto",
-        my: 2,
+        mx: 'auto',
+        my: 1,
         p: 0,
         gap: 0,
         overflow: "hidden",
@@ -109,7 +109,7 @@ export default function Item({ id ,name, image, count = {}, type }) {
           flexDirection: 'column',
           justifyContent: 'space-between',
           alignItems: 'stretch',
-          p: 0
+          px: 0
         }}
       >
         <Box
@@ -132,7 +132,7 @@ export default function Item({ id ,name, image, count = {}, type }) {
           level="h4"
           sx={theme => ({
             fontWeight: 600,
-            fontSize: { xs: '1.1rem', sm: '1.2rem', md: '1.3rem' },
+            fontSize: { xs: '1.1rem', sm: '1.3rem', md: '1.5rem' },
             flex: 1,
             [theme.breakpoints.up('cardChange')]: {
               overflow: 'hidden',

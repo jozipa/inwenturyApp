@@ -1,29 +1,23 @@
 import { useState, useEffect } from 'react';
 import * as React from 'react'
 
-import AddForm from '../components/NewItemForm.jsx';
 import FilterItems from '../components/FilterItems.jsx';
 import Item from '../components/Item.jsx';
 
 
-
-import { CssVarsProvider } from '@mui/joy/styles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
-import Breadcrumbs from '@mui/joy/Breadcrumbs';
-import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 
-import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
+
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 
 
 
 
 
-function InwentView() {
+function InventPage() {
   const [allItems, setAllItems] = useState([])
   const [items, setItems] = useState([])
 
@@ -44,14 +38,12 @@ function InwentView() {
     return (
       <React.Fragment>
         <CssBaseline />
-        <Box sx={{ display: 'flex', minHeight: '100dvh', overflow: 'hidden' }}>
+        <Box sx={{ display: 'flex', height: 'calc(100vh - 70px)', overflow: 'hidden' }}>
           <Box
-            component="main"
-            className="MainContent"
             sx={{
               px: { xs: 2, md: 4 },
               pt: 0,
-              pb: { xs: 2, sm: 2, md: 3 },
+              pb: 10,
               flex: 1,
               display: 'flex',
               flexDirection: 'column',
@@ -66,8 +58,7 @@ function InwentView() {
             <Box
               sx={{
                 display: 'flex',
-                mb: 1,
-                mt: 1,
+                my: 2,
                 gap: 1,
                 flexDirection: { xs: 'column', xsm: 'row' },
                 alignItems: { xs: 'start', xsm: 'center' },
@@ -75,7 +66,7 @@ function InwentView() {
                 justifyContent: 'space-between',
               }}
             >
-              <Typography level="h2" component="h1">
+              <Typography level="h1" component="h1">
                 Inwentaryzacja
               </Typography>
               <Button
@@ -89,7 +80,7 @@ function InwentView() {
 
              
                 <FilterItems its={allItems} onDelay={filteredItems}></FilterItems>
-                <Box sx={{overflowY: 'auto'}}>
+                <Box sx={{overflowY: 'auto', height: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 'md', px: 1}}>
                   {items.map((item) => (  
                     <Item
                       key={item.id}
@@ -110,4 +101,4 @@ function InwentView() {
   );
 }
 
-export default InwentView;
+export default InventPage;
