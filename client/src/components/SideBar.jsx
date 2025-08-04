@@ -16,7 +16,7 @@ import {
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SettingsIcon from '@mui/icons-material/Settings';
-
+import SummarizeIcon from '@mui/icons-material/Summarize';
 
 
 
@@ -41,14 +41,15 @@ export default function Sidebar() {
         borderRight: '1px solid',
         borderColor: 'divider',
         bgcolor: 'background.body',
+        transition: 'width 0.3s ease-in-out',
       }}
     >
-      {/* Logo / nazwa */}
+
       <Typography level="h4" textAlign="center" mb={2}>
         Grodzka 29
       </Typography>
 
-      {/* Lista linków */}
+     
       <List
         size="lg"
         sx={{
@@ -67,6 +68,16 @@ export default function Sidebar() {
         </ListItem>
 
         <ListItem>
+          <ListItemButton component={RouterLink} to="/raports">
+            <ListItemDecorator>
+              <SummarizeIcon />
+            </ListItemDecorator>
+            Raporty
+          </ListItemButton>
+        </ListItem>
+
+
+        <ListItem>
           <ListItemButton component={RouterLink} to="/newItem">
             <ListItemDecorator>
               <AddBoxIcon />
@@ -76,7 +87,7 @@ export default function Sidebar() {
         </ListItem>
 
         <ListItem>
-          <ListItemButton component={RouterLink} to="/settings">
+          <ListItemButton component={RouterLink} to="/#">
             <ListItemDecorator>
               <SettingsIcon />
             </ListItemDecorator>

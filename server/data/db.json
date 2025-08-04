@@ -12,8 +12,8 @@
     "count": {
       "S": 5,
       "M": 3,
-      "L": 4,
-      "XL": 4,
+      "L": 1,
+      "XL": 3,
       "XXL": 1
     }
   },
@@ -30,9 +30,9 @@
       "1": 0,
       "2": 0,
       "3-4": 3,
-      "5-6": 3,
-      "7-8": 3,
-      "9-11": 3,
+      "5-6": 2,
+      "7-8": 2,
+      "9-11": 1,
       "12-14": 3
     },
     "imageUrl": "/images/1753701586474.jpg"
@@ -49,7 +49,7 @@
     "count": {
       "S": 3,
       "M": 2,
-      "L": 2,
+      "L": 0,
       "XL": 2,
       "XXL": 1
     },
@@ -87,7 +87,7 @@
     "count": {
       "1": 3,
       "2": 2,
-      "3-4": 3,
+      "3-4": 2,
       "5-6": 3,
       "7-8": 3,
       "9-11": 0,
@@ -573,7 +573,7 @@
     "count": {
       "S": 5,
       "M": 2,
-      "L": 2,
+      "L": 1,
       "XL": 0,
       "XXL": 1
     },
@@ -650,7 +650,7 @@
       "1": 2,
       "2": 0,
       "3-4": 0,
-      "5-6": 2,
+      "5-6": 1,
       "7-8": 1,
       "9-11": 2,
       "12-14": 1
@@ -982,7 +982,7 @@
       "Bag"
     ],
     "count": {
-      "ilość": 20
+      "ilość": 11
     },
     "imageUrl": "/images/1753964044154.jpg"
   },
@@ -1005,5 +1005,96 @@
       "12-14": 0
     },
     "imageUrl": "/images/1754050418397.png"
+  },
+  {
+    "id": 1754294107437,
+    "name": "Torba eko Kościół Mariacki Grafika, natural",
+    "description": "kosciol grafika biały bialy",
+    "type": "single",
+    "categories": [
+      "Bag"
+    ],
+    "count": {
+      "ilość": 13
+    },
+    "imageUrl": "/images/1754294107430.jpg"
+  },
+  {
+    "id": 1754294207407,
+    "name": "Torba eko Sukiennice Grafika, natural",
+    "description": "sukiennice biały bialy bag",
+    "type": "single",
+    "categories": [
+      "Bag"
+    ],
+    "count": {
+      "ilość": 16
+    },
+    "imageUrl": "/images/1754294207405.jpg"
+  },
+  {
+    "id": 1754294276535,
+    "name": "Torba eko Wawel Grafika, natural",
+    "description": "torba wawel wisla obrazek",
+    "type": "single",
+    "categories": [
+      "Bag"
+    ],
+    "count": {
+      "ilość": 16
+    },
+    "imageUrl": "/images/1754294276533.jpg"
+  },
+  {
+    "id": 1754294548799,
+    "name": "Torba eko I Love Pierogi, natural",
+    "description": "kocham pierogi biały bialy",
+    "type": "single",
+    "categories": [
+      "Bag"
+    ],
+    "count": {
+      "ilość": 17
+    },
+    "imageUrl": "/images/1754294548797.jpg"
+  },
+  {
+    "id": 1754294618512,
+    "name": "Torba eko Polskie Pierogi, natural",
+    "description": "polska pierogi",
+    "type": "single",
+    "categories": [
+      "Bag"
+    ],
+    "count": {
+      "ilość": 12
+    },
+    "imageUrl": "/images/1754294618510.jpg"
+  },
+  {
+    "id": 1754294712614,
+    "name": "Torba eko Kościół Mariacki Akwarela, natural",
+    "description": "kosciol malunek ",
+    "type": "single",
+    "categories": [
+      "Bag"
+    ],
+    "count": {
+      "ilość": 6
+    },
+    "imageUrl": "/images/1754294712606.jpg"
+  },
+  {
+    "id": 1754294771172,
+    "name": "Torba eko Katedra na Wawelu Akwarela, natural",
+    "description": "malunek wawel katedra",
+    "type": "single",
+    "categories": [
+      "Bag"
+    ],
+    "count": {
+      "ilość": 8
+    },
+    "imageUrl": "/images/1754294771170.jpg"
   }
 ]

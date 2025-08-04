@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import * as React from 'react'
+
+import html2pdf from 'html2pdf.js'
 
 import FilterItems from '../components/FilterItems.jsx';
 import Item from '../components/Item.jsx';
@@ -21,6 +23,17 @@ function InventPage() {
   const [allItems, setAllItems] = useState([])
   const [items, setItems] = useState([])
 
+  const pdfRef = useRef();
+
+  function handleDownload(){
+    console.log('pobieram');
+    
+    html2pdf()
+      .from(pdfRef.current)
+      .set({ filename: 'items.pdf' })
+      .save();
+  };
+
   useEffect(() => {
     fetch('http://localhost:3001/api/items')
       .then(res => res.json())
@@ -30,6 +43,10 @@ function InventPage() {
       });
   }, []);
 
+  function haloo(){
+    console.log(123312331);
+    
+  }
   
   function filteredItems(itm){
     setItems(itm)
@@ -70,6 +87,7 @@ function InventPage() {
                 Inwentaryzacja
               </Typography>
               <Button
+                onClick={handleDownload}
                 color="primary"
                 startDecorator={<DownloadRoundedIcon />}
                 size="sm"
@@ -80,7 +98,7 @@ function InventPage() {
 
              
                 <FilterItems its={allItems} onDelay={filteredItems}></FilterItems>
-                <Box sx={{overflowY: 'auto', height: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 'md', px: 1}}>
+                <Box ref={pdfRef} sx={{overflowY: 'auto', height: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 'md', px: 1}}>
                   {items.map((item) => (  
                     <Item
                       key={item.id}
