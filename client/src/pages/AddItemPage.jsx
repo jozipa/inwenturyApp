@@ -1,61 +1,62 @@
 import { useState, useEffect } from 'react';
+import { useInventory } from '../context/inventoryContext.jsx';
+import { useSnackbar } from '../context/snackBarContext';
 
-import { Box, Input, Button, Select, Option, Typography } from '@mui/joy';
+import { Box, Input, Button, Select, Option, Typography, Table, Sheet } from '@mui/joy';
 
 
 
 
 export default function AddItemPage() {
-  const [categories, setCategories] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedSizeGroup, setSelectedSizeGroup] = useState(null);
-  const [sizes, setSizes] = useState({});
+  const {allSizeTemplates, processNewProductAdd} = useInventory();
+  const {showSnackbar} = useSnackbar();
+
   const [prname, setName] = useState("Nazwa");
   const [desc, setDesc] = useState("Opis");
   const [imageFile, setImageFile] = useState(null); 
-  const [itemType, setItemType] = useState(null)
+  const [productType, setProductType] = useState(null);
+  const [sizeTemplate, setSizeTemplate] = useState([]);
 
+  const [barcodesMap, setBarcodesMap] = useState(null);
 
-  useEffect(() => {
-    fetch('http://localhost:3001/api/categories')
-      .then(res => res.json())
-      .then(data => setCategories(data));
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    let categories = []
-    categories.push(selectedCategory.name)
-    if (selectedSizeGroup) {
-      categories.push(selectedSizeGroup.name)
-    }
-
-
-    const formData = new FormData(); // 👈 to ważne
-    formData.append('name', prname);
-    formData.append('description', desc);
-    formData.append('type', itemType);
-    formData.append('categories', categories);
-
-    if(itemType=="multiple"){
-      formData.append('count', JSON.stringify(sizes)); // rozmiary jako JSON
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    const status = await processNewProductAdd(prname, desc, "multiple", imageFile, [productType.name], barcodesMap)
+    if (status){
+      showSnackbar(`Pomyślnie dodano przedmiot ${prname}`)
     } else {
-      formData.append('count', JSON.stringify({ilość: 0}))
+      showSnackbar(`Nie udało się dodać przedmiotu ${prname}`, 'danger')
     }
-    
-    if (imageFile) {
-      formData.append('image', imageFile); // 👈 dodajesz obrazek
-    }
-
-    fetch('http://localhost:3001/api/items', {
-      method: 'POST',
-      body: formData, // 👈 nie dodajesz Content-Type, browser sam to zrobi
-    })
-      .then(res => res.json())
-      .then(data => console.log('Dodano:', data));
   };
 
+  const handleTypeChange = (value) => {
+    const cat = allSizeTemplates.productTypes.find(c => c.name === value);
+    if (cat){
+      setProductType(cat);
+      const sizesObj = allSizeTemplates.sizeTemplates.find(c => c.id == cat.size_template_id);
+      if (sizesObj){
+        const sizeArray = JSON.parse(sizesObj.sizes);
+        setSizeTemplate(sizeArray);        
+
+        const initBarcodeObject = {}
+        for (let i = 0; i<sizeArray.length; i++){
+          initBarcodeObject[sizeArray[i]] = '';
+        }
+        setBarcodesMap(initBarcodeObject);
+      }
+    } else {
+      setSizeTemplate(null);
+      setBarcodesMap({});
+    } 
+  }
+
+  const handleBarcodeChange = (size, value) => {
+    setBarcodesMap(prev => ({
+      ...prev,
+      [size]: value
+    }))
+  }
+  
   return (
     <Box
         sx={{
@@ -68,7 +69,7 @@ export default function AddItemPage() {
         }}
         >
         <form onSubmit={handleSubmit}>
-            <Typography level="h4" mb={2}>Dodaj koszulkę</Typography>
+            <Typography level="h4" mb={2}>Dodaj nowy produkt</Typography>
 
             <Input
             name="name"
@@ -96,43 +97,47 @@ export default function AddItemPage() {
 
             <Select
             placeholder="Wybierz kategorię"
-            onChange={(e, value) => {
-                const cat = categories.find(c => c.name === value);
-                setSelectedCategory(cat);
-                setItemType(cat?.kind);
-                setSelectedSizeGroup(null);
-            }}
+            onChange={(e, value) => handleTypeChange(value)}
             sx={{ mb: 2 }}
             >
+
             <Option value="">-- Wybierz kategorię --</Option>
-            {categories.map(c => (
+            {allSizeTemplates.productTypes.map(c => (
                 <Option key={c.id} value={c.name}>{c.name}</Option>
             ))}
             </Select>
 
-            {selectedCategory?.type && (
-            <Select
-                placeholder="Wybierz grupę rozmiarową"
-                onChange={(e, value) => {
-                const sizesObj = selectedCategory.type.find(el => el.name === value);
-                setSelectedSizeGroup(sizesObj);
-                const sizesAr = sizesObj.sizes;
-                const newSizes = sizesAr.reduce((acc, size) => {
-                    acc[size] = 0;
-                    return acc;
-                }, {});
-                setSizes(newSizes);
-                }}
-                sx={{ mb: 2 }}
-            >
-                <Option value="">-- Wybierz grupę rozmiarową --</Option>
-                {selectedCategory.type.map(sizeGroup => (
-                <Option key={sizeGroup.name} value={sizeGroup.name}>{sizeGroup.name}</Option>
+            <Sheet variant="soft" sx={{ p: 2, mb: 2, borderRadius: 'sm', height: 300, overflow: 'auto' }}>
+            <Typography level="title-sm" mb={1}>
+              Konfiguracja kodów kreskowych dla rozmiarów:
+            </Typography>
+            
+            <Table aria-label="tabela rozmiarów" stickyHeader>
+              <thead>
+                <tr>
+                  <th>Rozmiar</th>
+                  <th>Kod kreskowy (EAN)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sizeTemplate.map(size => (
+                  <tr key={size}>
+                    <td><strong>{size}</strong></td>
+                    <td>
+                      <Input
+                        size="sm"
+                        placeholder={`Wpisz kod dla ${size}`}
+                        value={barcodesMap[size] || ''}
+                        onChange={(e) => handleBarcodeChange(size, e.target.value)}
+                      />
+                    </td>
+                  </tr>
                 ))}
-            </Select>
-            )}
+              </tbody>
+            </Table>
+          </Sheet>
 
-            <Button type="submit" variant="solid">Dodaj</Button>
+          <Button type="submit" variant="solid">Dodaj</Button>
         </form>
     </Box>
   );

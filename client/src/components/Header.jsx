@@ -1,10 +1,6 @@
 import { useState } from 'react';
 
 import { Button, Card, CardContent } from '@mui/joy';
-import Drawer from '@mui/joy/Drawer';
-import Typography from '@mui/joy/Typography';
-import CardActions from '@mui/joy/CardActions';
-
 
 import IconButton from '@mui/joy/IconButton';
 import Menu from '@mui/icons-material/Menu';
@@ -13,9 +9,6 @@ import Avatar from '@mui/joy/Avatar';
 
 
 export default function Header({ onToggleSidebar }) {
-
- 
-
   return (
     <Card 
       variant='plain' 

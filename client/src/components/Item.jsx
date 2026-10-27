@@ -1,55 +1,43 @@
 import { useState } from 'react';
 import Counter from './Counter'; 
 const API_URL = import.meta.env.VITE_API_URL;
-import { Card, CardContent, Typography, Box, Button, AspectRatio, CardOverflow, Snackbar } from '@mui/joy';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Card, CardContent, Typography, Box, Button, CardOverflow, Snackbar } from '@mui/joy';
 import Badge from '@mui/joy/Badge';
+import { useInventory } from '../context/inventoryContext';
+import { useSnackbar } from '../context/snackBarContext';
 
+export default function Item({ id, name, image, variants = [] }) {
+  const {processProductsChange} = useInventory();
+  const {showSnackbar} = useSnackbar();
 
-export default function Item({ id ,name, image, count = {} }) {
-  const [updated, setUpdated] = useState(count);
-  const [snackOpen, setSnackOpen] = useState(false)
-  const [snackMessage, setSnackMessage] = useState(null)
-  const [ifChanged, setIfChanged] = useState(true)
+  const [updated, setUpdated] = useState(() => {
+    const initialMap = {};
+    variants.forEach(v => {
+      initialMap[v.id] = 0;
+    });
+    return initialMap;
+  });
 
-  function handleCounterChange(size, count) {
+  const [ifChanged, setIfChanged] = useState(true);
+
+  function handleCounterChange(id, count) {
     setUpdated(prev => ({
       ...prev,
-      [size]: count
+      [id]: count
     }));
-    setIfChanged(false)
+    
+    setIfChanged(false);
   }
 
   function handlePatch(){
-    fetch('http://localhost:3001/api/items', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ 
-        id: id,
-        count: updated 
-      })
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log('Pomyślnie zaktualizowano element', data);
-        let el = JSON.stringify(data.item.id)
-        setSnackMessage(`Pomyślnie zaktualizowano produkt o id: ${el}`)
-        setIfChanged(true)
-        handleSnack()
-      })
-      .catch(err => {
-        console.error('Błąd aktualizacji:', err);
-      });
-  }
-
-  function handleSnack(){
-    setSnackOpen(true)
-    setTimeout(() => {
-      setSnackOpen(false)
-    }, 2000);
+    const status = processProductsChange(updated);
+    
+    
+    if (status){
+      showSnackbar('Pomyślnie zaktualizowano produkt!');
+      setIfChanged(true);
+      
+    }
   }
 
   return (
@@ -66,26 +54,14 @@ export default function Item({ id ,name, image, count = {} }) {
         gap: 0,
         overflow: "hidden",
         borderRadius: "lg",
-        height: { xs: 'auto', cardChange: '180' },
       }}
     >
 
-      <Snackbar
-        anchorOrigin={{horizontal: "center", vertical: "top"}}
-        autoHideDuration={2000}
-        color="success"
-        variant="solid"
-        open={snackOpen}
-        startDecorator={<CheckCircleIcon />}
-      >
-        {snackMessage}
-      </Snackbar>
       <CardOverflow
         sx={{
           flexShrink: 0,
           width: { xs: '100%', cardChange: 'auto' },
-          height: { xs: 'auto', cardChange: 180 }, // <-- kluczowe
-          aspectRatio: { xs: '1', cardChange: 'auto' },
+          height: { xs: 'auto', cardChange: 180 },
           display: 'flex',
           alignItems: 'stretch',
         }}
@@ -109,7 +85,7 @@ export default function Item({ id ,name, image, count = {} }) {
           flexDirection: 'column',
           justifyContent: 'space-between',
           alignItems: 'stretch',
-          px: 0
+          px: 2
         }}
       >
         <Box
@@ -119,55 +95,35 @@ export default function Item({ id ,name, image, count = {} }) {
             justifyContent: 'space-between',
             alignItems: 'center',
             gap: 1,
-            mb: 0,
-            pr: 1.5,
             pt: 1.5,
             pb: 1.5,
-            flexWrap: 'wrap',
-            height: '50px',
-            width: '100%'
           }}
         >
-        <Typography
-          level="h4"
-          sx={theme => ({
-            fontWeight: 600,
-            fontSize: { xs: '1.1rem', sm: '1.3rem', md: '1.5rem' },
-            flex: 1,
-            [theme.breakpoints.up('cardChange')]: {
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
-            },
-          })}
-        >
+          <Typography level="h4" sx={{ fontWeight: 600, flex: 1 }}>
             {name}
           </Typography>
           <Badge badgeContent="!" invisible={ifChanged}>
-            <Button
-              size="sm"
-              onClick={handlePatch}
-              sx={{ whiteSpace: 'nowrap' }}
-            >
+            <Button size="sm" onClick={handlePatch}>
               Zatwierdź zmiany
             </Button>
           </Badge>
         </Box>
+
         <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
             gap: 1.5,
             alignItems: "center",
-            height: "100%",
-            mt: 0.5
+            my: 1
           }}
         >
-          {Object.entries(count).map(([count, quantity]) => (
+          {variants.map((variant) => (
             <Counter
-              key={count}
-              size={count}
-              amount={quantity}
+              key={variant.id}
+              id = {variant.id}
+              size={variant.size}
+              amount={variant.count}
               onChange={handleCounterChange}
               sx={{
                 flex: '1 0 60px',
@@ -177,7 +133,6 @@ export default function Item({ id ,name, image, count = {} }) {
           ))}
         </Box>
       </CardContent>
-
     </Card>
   );
 }

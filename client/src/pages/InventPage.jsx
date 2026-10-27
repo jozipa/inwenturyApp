@@ -1,56 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
 import * as React from 'react'
-
-import html2pdf from 'html2pdf.js'
+import { useInventory } from '../context/inventoryContext.jsx';
 
 import FilterItems from '../components/FilterItems.jsx';
 import Item from '../components/Item.jsx';
-
-
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import Typography from '@mui/joy/Typography';
-
-
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 
 
-
-
-
 function InventPage() {
-  const [allItems, setAllItems] = useState([])
-  const [items, setItems] = useState([])
+    const { groupedProducts, loading } = useInventory();
+    const [items, setItems] = useState();
 
-  const pdfRef = useRef();
-
-  function handleDownload(){
-    console.log('pobieram');
+    useEffect(() => {
+      setItems(groupedProducts);
+    }, [])
     
-    html2pdf()
-      .from(pdfRef.current)
-      .set({ filename: 'items.pdf' })
-      .save();
-  };
-
-  useEffect(() => {
-    fetch('http://localhost:3001/api/items')
-      .then(res => res.json())
-      .then(data => {
-        setAllItems(data);
-        setItems(data)
-      });
-  }, []);
-
-  function haloo(){
-    console.log(123312331);
+    if (loading) return <Typography>Ładowanie magazynu...</Typography>;
     
-  }
-  
-  function filteredItems(itm){
-    setItems(itm)
-  }
+    function filteredItems(itm){
+      setItems(itm)
+    }
+
+
 
     return (
       <React.Fragment>
@@ -87,7 +62,6 @@ function InventPage() {
                 Inwentaryzacja
               </Typography>
               <Button
-                onClick={handleDownload}
                 color="primary"
                 startDecorator={<DownloadRoundedIcon />}
                 size="sm"
@@ -97,15 +71,15 @@ function InventPage() {
             </Box>
 
              
-                <FilterItems its={allItems} onDelay={filteredItems}></FilterItems>
-                <Box ref={pdfRef} sx={{overflowY: 'auto', height: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 'md', px: 1}}>
-                  {items.map((item) => (  
+                <FilterItems its={groupedProducts} onDelay={filteredItems}></FilterItems>
+                <Box sx={{overflowY: 'auto', height: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 'md', px: 1}}>
+                  {groupedProducts.map((item) => (  
                     <Item
                       key={item.id}
                       id={item.id}
                       name={item.name}
                       image={item.imageUrl}
-                      count={item.count}
+                      variants={item.variants}
                       type={item.type}
                     />
                   ))}

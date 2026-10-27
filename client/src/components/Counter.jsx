@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Card, CardContent } from '@mui/joy';
+import { Card } from '@mui/joy';
 import Typography from '@mui/joy/Typography';
 import CardActions from '@mui/joy/CardActions';
 import Add from '@mui/icons-material/Add';
@@ -13,12 +13,15 @@ import Chip from '@mui/joy/Chip';
 
 
 
-export default function Counter({ amount, size, onChange}) {
+export default function Counter({ id ,amount, size, onChange}) {
   const [counter, setCounter] = useState(amount);
+  const [counterChange, setCounterChange] = useState(0);
 
   const handleChange = (val) => {
-    setCounter(val);
-    if (onChange) onChange(size, val);
+    if (counter+counterChange+val>=0){
+      if (onChange) onChange(id, counterChange+val);
+      setCounterChange(counterChange+val);
+    }
   };
 
   return (
@@ -31,7 +34,7 @@ export default function Counter({ amount, size, onChange}) {
         m: 0,
         display: 'flex',
         flexDirection: 'column',
-        gap: 0, // <-- kluczowe
+        gap: 0, 
       }}
     >
   <Chip
@@ -74,7 +77,7 @@ export default function Counter({ amount, size, onChange}) {
       level="body-lg"
       fontWeight={600}
     >
-      {counter}
+      {counter+counterChange}
     </Typography>
   </Box>
 
@@ -92,7 +95,7 @@ export default function Counter({ amount, size, onChange}) {
       size="xs"
       sx={{ p: 0.8 }}
       variant="soft"
-      onClick={() => handleChange(counter - 1)}
+      onClick={() => handleChange(-1)}
     >
       <Remove fontSize="sm" />
     </IconButton>
@@ -100,7 +103,7 @@ export default function Counter({ amount, size, onChange}) {
       size="xs"
       sx={{ p: 0.8 }}
       variant="solid"
-      onClick={() => handleChange(counter + 1)}
+      onClick={() => handleChange(1)}
     >
       <Add fontSize="sm" />
     </IconButton>

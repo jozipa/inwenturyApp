@@ -5,6 +5,7 @@ export default function FilterItems({ its, onDelay }) {
   const [filteredItems, setItems] = useState();
   const debounceRef = useRef(null); 
 
+
   useEffect(() => {
     setItems(its);
   }, [its]);

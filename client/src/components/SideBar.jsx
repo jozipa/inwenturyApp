@@ -19,10 +19,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 
 
-
-
 export default function Sidebar() {
-    
 
   return (
     <Sheet

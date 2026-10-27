@@ -10,11 +10,8 @@ import Sidebar from '../components/SideBar.jsx';
 
  export default function MainLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
-  
-
-
+    
     const toggleSidebar = () => setSidebarOpen(prev => !prev);
-
 
     return (
       <Box sx={{display: 'flex', flexDirection: "column", height: '100vh', overflow: 'hidden'}}>
