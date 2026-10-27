@@ -29,8 +29,8 @@ export default function Item({ id, name, image, variants = [] }) {
     setIfChanged(false);
   }
 
-  function handlePatch(){
-    const status = processProductsChange(updated);
+  async function handlePatch(){
+    const status = await processProductsChange(updated);
     
     
     if (status){

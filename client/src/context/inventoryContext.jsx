@@ -32,7 +32,7 @@ export function InventoryProvider({children}) {
             .catch(err => {
                 console.error("Nie udało się zaladowac danych", err);
             })
-    })
+    }, [])
 
     const groupedProducts = useMemo(() => {
         return models.map(model => ({
@@ -90,13 +90,13 @@ export function InventoryProvider({children}) {
             );
             console.log(cleanedSizesBarcode);
             
-            const formData = new FormData();
+           const formData = new FormData();
             formData.append('name', name);
             formData.append('description', desc);
             formData.append('type', type);
-            formData.append('image', imageData);
-            formData.append('categories', categories)
-            formData.append('sizesBarcode', cleanedSizesBarcode)
+            formData.append('categories', JSON.stringify(categories));
+            formData.append('sizesBarcode', JSON.stringify(cleanedSizesBarcode));
+            if (imageData) formData.append('image', imageData);
 
             const response = await addNewProduct(formData);
             return response;

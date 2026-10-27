@@ -26,12 +26,12 @@ exports.createProductModel = (req, res) => {
       console.log('zyje', req.body);
 
       const productData = {
-            name: req.body.name,
-            description: req.body.description,
-            type: req.body.type,
-            categories: req.body.categories,
-            sizesBarcode: req.body.sizesBarcode,
-            imageUrl: imageUrl
+        name: req.body.name,
+        description: req.body.description,
+        type: req.body.type,
+        categories: req.body.categories,
+        sizesBarcode: JSON.parse(req.body.sizesBarcode || '{}'),
+        imageUrl
       };
       console.log(productData);
       

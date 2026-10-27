@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useMemo } from 'react';
 import * as React from 'react'
 import { useInventory } from '../context/inventoryContext.jsx';
 
@@ -13,19 +13,19 @@ import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 
 function InventPage() {
     const { groupedProducts, loading } = useInventory();
-    const [items, setItems] = useState();
+    const [query, setQuery] = useState('');
 
-    useEffect(() => {
-      setItems(groupedProducts);
-    }, [])
+    const visibleItems = useMemo(() => {
+      const words = (query ?? '').toLowerCase().split(' ').filter(w => w.trim() !== '');
+      if (words.length === 0) return groupedProducts;
+
+      return groupedProducts.filter(item => {
+        const text = `${item.name} ${item.description ?? ''}`.toLowerCase();
+        return words.every(w => text.includes(w));
+      });
+  }, [groupedProducts, query]);
     
     if (loading) return <Typography>Ładowanie magazynu...</Typography>;
-    
-    function filteredItems(itm){
-      setItems(itm)
-    }
-
-
 
     return (
       <React.Fragment>
@@ -71,9 +71,9 @@ function InventPage() {
             </Box>
 
              
-                <FilterItems its={groupedProducts} onDelay={filteredItems}></FilterItems>
+                <FilterItems onSearch={ setQuery }></FilterItems>
                 <Box sx={{overflowY: 'auto', height: '100%', border: '1px solid', borderColor: 'divider', borderRadius: 'md', px: 1}}>
-                  {groupedProducts.map((item) => (  
+                  {visibleItems.map((item) => (  
                     <Item
                       key={item.id}
                       id={item.id}

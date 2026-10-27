@@ -44,10 +44,7 @@ export default function AddItemPage() {
         }
         setBarcodesMap(initBarcodeObject);
       }
-    } else {
-      setSizeTemplate(null);
-      setBarcodesMap({});
-    } 
+    }
   }
 
   const handleBarcodeChange = (size, value) => {
