@@ -42,18 +42,18 @@ exports.createProductModel = (req, res) => {
     }
 }
 
-exports.updateProduct = (req, res) => {
+exports.updateProducts = (req, res) => {
     try {
-      const updatedId = productService.updateProduct(req.body);
+      const updatedId = productService.updateProducts(req.body);
       res.status(201).json({id: updatedId, message: "Pomyślnie zaktualizowano produkt"});
     } catch (error){
       res.status(500).json({error: error.message})
     }
 }
 
-exports.updateProductsFromReceipt = (req, res) => {
+exports.updateProductsFromCart = (req, res) => {
   try {
-    productService.updateProducts(req.body);
+    productService.updateProductsFromCart(req.body);
     res.status(201).json({message: "Pomyślnie zaktualizowano produkty z paragonu"});
   } catch (error){
     res.status(500).json({error: error.message});

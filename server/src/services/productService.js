@@ -50,14 +50,6 @@ exports.createProductModel = (body) => {
     return createTransaction();
 };
 
-exports.updateProduct = async (body)=> {
-    db.prepare(`
-        UPDATE products
-        SET count = MAX(0, count - ?)
-        WHERE id = ?
-        `).run(body.count, body.id);
-}
-
 exports.updateProducts = async (body) => {
     const updateProduct = db.prepare(`UPDATE products
         SET count = MAX(0, count + ?)
@@ -67,8 +59,21 @@ exports.updateProducts = async (body) => {
     const receiptTransaction = db.transaction((items) => {
         for (const [id,count] of Object.entries(items)){
             updateProduct.run(count, id);
-            console.log(count,id);
-            
+        }
+    })
+    
+    receiptTransaction(body.scannedItems);
+}
+
+exports.updateProductsFromCart = async (body) => {
+    const updateProduct = db.prepare(`UPDATE products
+        SET count = MAX(0, count - ?)
+        WHERE id = ?
+        `)
+    
+    const receiptTransaction = db.transaction((items) => {
+        for (const product of items){
+            updateProduct.run(product.count, product.id);
         }
     })
     

@@ -1,5 +1,5 @@
 import React, { createContext,useEffect, useMemo, useState, useContext } from "react";
-import { fetchInventory, updateProducts, fetchSizeTemplates, addNewProduct } from "../api/productsApi.js";
+import { fetchInventory, updateProducts, fetchSizeTemplates, addNewProduct, updateProductsFromCart } from "../api/productsApi.js";
 
 const InventoryContext = createContext(null);
 
@@ -43,18 +43,24 @@ export function InventoryProvider({children}) {
     }, [models, products]);
 
     const allProducts = useMemo(() => {
+        if (models.length==0) return [];
         const modelsByID = Object.fromEntries(models.map(m => [m.id, m]));
+        console.log(modelsByID[1].name, 'modelsIID');
+        console.log(products);
+        
+        
         return products.map(product => ({
             ...product,
-            name: modelsByID[product.module_id]?.name || "Unknown product",
-            imageUrl: modelsByID[product.module_id]?.imageUrl || '',
-            categories: modelsByID[product.module_id]?.categories || [],
+            name: modelsByID[product.model_id]?.name || "Unknown product",
+            imageUrl: modelsByID[product.model_id]?.imageUrl || '',
+            categories: modelsByID[product.model_id]?.categories || [],
         }));
     }, [models, products])
 
     const allSizeTemplates = useMemo(() => {
         return {sizeTemplates, productTypes}
     }, [sizeTemplates, productTypes])
+
 
     const processProductsChange = async (scannedItems) => {
         try {
@@ -80,6 +86,15 @@ export function InventoryProvider({children}) {
         }
     }
 
+    const processProductsFromCartSale = async (scannedItems) => {
+        try {
+            const response = await updateProductsFromCart(scannedItems);
+            return response
+        } catch (error){
+            return false
+        }
+    }
+
     const processNewProductAdd = async (name, desc, type, imageData, categories, sizesBarcode) => {
         try {
             const cleanedSizesBarcode = Object.fromEntries(
@@ -102,14 +117,13 @@ export function InventoryProvider({children}) {
             return response;
         } catch (error) {
             console.log("Błąd sprzedaży: " + error.message);
-            
             return false;
         }
     }
     
 
     return (
-        <InventoryContext.Provider value={{groupedProducts, allProducts, allSizeTemplates, processProductsChange, processNewProductAdd,loading}}>
+        <InventoryContext.Provider value={{groupedProducts, allProducts, allSizeTemplates, processProductsChange, processNewProductAdd,processProductsFromCartSale,loading}}>
             {children}
         </InventoryContext.Provider>
     )

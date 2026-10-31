@@ -2,13 +2,11 @@ import React from 'react';
 import { Outlet, Link as RouterLink } from 'react-router-dom';
 
 import {
-  Box,
   List,
   ListItem,
   ListItemButton,
   ListItemDecorator,
   Typography,
-  Divider,
   Sheet
 } from '@mui/joy';
 
@@ -17,6 +15,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SummarizeIcon from '@mui/icons-material/Summarize';
+import StoreIcon from '@mui/icons-material/Store';
 
 
 export default function Sidebar() {
@@ -55,6 +54,15 @@ export default function Sidebar() {
           flexGrow: 1,
         }}
       >
+        <ListItem>
+          <ListItemButton component={RouterLink} to="/sale">
+            <ListItemDecorator>
+              <StoreIcon />
+            </ListItemDecorator>
+            Sprzedaż
+          </ListItemButton>
+        </ListItem>
+
         <ListItem>
           <ListItemButton component={RouterLink} to="/inventory">
             <ListItemDecorator>

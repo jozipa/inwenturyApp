@@ -1,34 +1,74 @@
 import { useState, useMemo } from 'react';
 import * as React from 'react'
 import { useInventory } from '../context/inventoryContext.jsx';
+import { useSnackbar } from '../context/snackBarContext';
 
-import FilterItems from '../components/FilterItems.jsx';
+const API_URL = import.meta.env.VITE_API_URL;
+
+import Autocomplete, {createFilterOptions} from '@mui/joy/Autocomplete';
+import AutocompleteOption from '@mui/joy/AutocompleteOption';
+import ListItemDecorator from '@mui/joy/ListItemDecorator';
+import ListItemContent from '@mui/joy/ListItemContent';
+import Typography from '@mui/joy/Typography';
+import Select from '@mui/joy/Select';
+import Option from '@mui/joy/Option';
+import Table from '@mui/joy/Table';
+import Button from '@mui/joy/Button';
+
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
-import Button from '@mui/joy/Button';
-import Typography from '@mui/joy/Typography';
+import ClearIcon from '@mui/icons-material/Clear';
 
 
 
-function SalePage() {
-    const { allProducts, loading } = useInventory();
-    const [query, setQuery] = useState('');
+export default function SalePage() {
+    const { allProducts, processProductsFromCartSale, loading } = useInventory();
+    const {showSnackbar} = useSnackbar();
+    const [amount, setAmount] = useState(1);
+    const [inputValue, setInputValue] = useState("");
+    const [cart, setCart] = useState([]);
 
-    const visibleItems = useMemo(() => {
-      const code = (query ?? '').toLowerCase().split(' ').filter(w => w.trim() !== '');
+    function deleteFromCart(selectedProduct){
+      setCart(l => l.filter(item => item.id != selectedProduct.id));
+    }
 
-      if (code.length==0){
-        return []
-      }
-
-
-      return allProducts.find(item => {
-        const text = `${item.name} ${item.barcode ?? ''}`.toLowerCase();
-        return words.every(w => text.includes(w));
+    async function handleReceipt(){
+      const parsedCart = cart.map((el) => {
+        return {id: el.id, count: el.amount, date: Date.now()};
       });
-    }, [groupedProducts, query]);
+      const response = await processProductsFromCartSale(parsedCart);
+      if (response){
+        setCart([]);
+        showSnackbar("Pomyslnie zaktualizowano stan produktów!");
+      } else {
+        showSnackbar("Nie udało się zaktualizować stanu produktów!", "danger");
+      }
+    }
+
+    function addToCart(selectedProduct){
+      const selectedProductInCart = cart.find((el) => el.id == selectedProduct.id);
+      const newProductObj = {...selectedProduct, amount: amount};
+      if (!selectedProductInCart){
+        setCart([
+        newProductObj,
+        ...cart,
+      ])
+      } else {
+        const newCart = cart.map((el) => {
+          if (el.id==selectedProductInCart.id){
+            return {...el, amount: el.amount+1}
+          } else {
+            return el
+          }
+        })
+        setCart(newCart);
+      }
+    }
+
     
-    if (loading) return <Typography>Ładowanie zasobów...</Typography>;
+    if (loading){
+      return <Typography>Ładowanie zasobów...</Typography>;
+    } 
 
     return (
       <React.Fragment>
@@ -55,8 +95,8 @@ function SalePage() {
                 display: 'flex',
                 my: 2,
                 gap: 1,
-                flexDirection: { xs: 'column', xsm: 'row' },
-                alignItems: { xs: 'start', xsm: 'center' },
+                flexDirection: { xs: 'column' },
+                alignItems: { xs: 'start'},
                 flexWrap: 'wrap',
                 justifyContent: 'space-between',
               }}
@@ -66,16 +106,96 @@ function SalePage() {
               </Typography>
             </Box>
 
-             
-            <FilterItems onSearch={ setQuery }></FilterItems>
-                
-            
-               
-            
+            <Box sx={{
+                display: 'flex',
+                my: 2,
+                gap: 1,
+                flexDirection: { xs: 'row' },
+                alignItems: { xs: 'start'},
+                flexWrap: 'wrap',
+              }}>
+              <Autocomplete
+                placeholder="Wyszukaj przedmiot"
+                sx={{ width: 700 }}
+                inputValue={inputValue}
+                options={allProducts}
+                getOptionLabel={(option) => `${option.name} Rozmiar: ${option.size}`}
+                onInputChange={(event, value) => {
+                  
+                  if (event?.type == 'change'){
+                    setInputValue(value)
+                  }
+                }}
+                onChange={(event, selectedProduct) => {
+                  if (selectedProduct){
+                    console.log('chango');
+                    
+                    setInputValue('');
+                    addToCart(selectedProduct);
+                  } 
+                }}
+
+              renderOption={(props, option) => {
+                const { key, ...otherProps } = props;
+
+                return (
+                  <AutocompleteOption key={option.id} {...otherProps}>
+                    <ListItemDecorator>
+                      <img
+                        loading="lazy"
+                        width="40"
+                        src={`${API_URL}${option.imageUrl}`}
+                        alt="niezaladowano"
+                      />
+                    </ListItemDecorator>
+                    <ListItemContent sx={{ fontSize: 'md' }}>
+                      {option.name} 
+                      <Typography level="body-xs">
+                        Rozmiar: {option.size}
+                      </Typography>
+                    </ListItemContent>
+                  </AutocompleteOption>
+              )}}
+            />
+            <Select value={amount} onChange={(e, newValue) => {setAmount(newValue)}}>
+              <Option value={1}>1</Option>
+              <Option value={2}>2</Option>
+            </Select>
+          </Box>
+
+            <Table sx={{ '& thead th:nth-of-type(2)': { width: '40%' } }}>
+              <thead>
+                <tr>
+                  <th>Zdjęcie</th>
+                  <th>Nazwa</th>
+                  <th>Rozmiar</th>
+                  <th>Ilość</th>
+                  <th>Usuń</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart.map((product) => (
+                  <tr key={product.id}>
+                    <td><img
+                        loading="lazy"
+                        width="40"
+                        src={`${API_URL}${product.imageUrl}`}
+                        alt="niezaladowano"
+                      /></td>
+                    <td>{product.name}</td>
+                    <td>{product.size}</td>
+                    <td>{product.amount}</td>
+                    <td><Button variant='outlined' onClick={()=>{deleteFromCart(product)}} color='danger' ><ClearIcon/></Button></td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+            <Box sx={{mg:2, display: 'flex',justifyContent: 'flex-end'}}>
+                <Button onClick={() => {setCart([])} } color='danger'>Anuluj</Button>
+                <Button onClick={() => {handleReceipt()}}>Zatwierdź</Button>
+            </Box>
           </Box>
         </Box>
       </React.Fragment>
   );
 }
-
-export default InventPage;

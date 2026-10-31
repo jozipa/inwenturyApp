@@ -21,7 +21,20 @@ export async function fetchSizeTemplates(){
 export async function updateProducts(scannedItems){
     console.log(JSON.stringify({scannedItems}));
     
-    const response = await fetch(`${API_URL}/products/receipt`, {
+    const response = await fetch(`${API_URL}/products/`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({scannedItems}),
+    });
+    
+    if (!response.ok) throw new Error('Błąd zatwierdzania paragonu');
+    return await response.json();
+}
+
+export async function updateProductsFromCart(scannedItems){
+    console.log(JSON.stringify({scannedItems}));
+    
+    const response = await fetch(`${API_URL}/products/cart`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({scannedItems}),

@@ -84,7 +84,7 @@ function InventPage() {
                     />
                   ))}
                 </Box>
-            
+          
                
             
           </Box>

@@ -9,6 +9,7 @@ import MainLayout from './layout/MainLayout';
 import AddItemPage from './pages/AddItemPage';
 import InventPage from './pages/InventPage';
 import RaportsPage from './pages/RaportsPage';
+import SalePage from './pages/SalePage.jsx';
 
 function App() {
     return (
@@ -23,6 +24,7 @@ function App() {
                   <Route path="inventory" element={<InventPage />} />
                   <Route path="newItem" element={<AddItemPage />} />
                   <Route path="raports" element={<RaportsPage />} />
+                  <Route path="sale" element={<SalePage />} />
                 </Route>
               </Routes>
          
