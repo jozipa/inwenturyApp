@@ -5,7 +5,7 @@ import { useSnackbar } from '../context/snackBarContext';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-import Autocomplete, {createFilterOptions} from '@mui/joy/Autocomplete';
+import Autocomplete from '@mui/joy/Autocomplete';
 import AutocompleteOption from '@mui/joy/AutocompleteOption';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import ListItemContent from '@mui/joy/ListItemContent';
@@ -14,6 +14,7 @@ import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 import Table from '@mui/joy/Table';
 import Button from '@mui/joy/Button';
+import { Sheet } from '@mui/joy';
 
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
@@ -27,18 +28,28 @@ export default function SalePage() {
     const [amount, setAmount] = useState(1);
     const [inputValue, setInputValue] = useState("");
     const [cart, setCart] = useState([]);
+    const [summaryPrice, setSummaryPrice] = useState(0);
 
     function deleteFromCart(selectedProduct){
+      console.log(selectedProduct);
       setCart(l => l.filter(item => item.id != selectedProduct.id));
+      const newPrice = summaryPrice-(selectedProduct.price*selectedProduct.amount)
+      setSummaryPrice(newPrice);
+    }
+
+    function resetReceipt(){
+      setAmount(1);
+      setCart([]);
+      setSummaryPrice(0);
     }
 
     async function handleReceipt(){
       const parsedCart = cart.map((el) => {
-        return {id: el.id, count: el.amount, date: Date.now()};
+        return {id: el.id, count: el.amount, price: el.price};
       });
       const response = await processProductsFromCartSale(parsedCart);
       if (response){
-        setCart([]);
+        resetReceipt();
         showSnackbar("Pomyslnie zaktualizowano stan produktów!");
       } else {
         showSnackbar("Nie udało się zaktualizować stanu produktów!", "danger");
@@ -48,6 +59,9 @@ export default function SalePage() {
     function addToCart(selectedProduct){
       const selectedProductInCart = cart.find((el) => el.id == selectedProduct.id);
       const newProductObj = {...selectedProduct, amount: amount};
+
+      const newPrice = summaryPrice + (selectedProduct.price * amount)
+      setSummaryPrice(newPrice);
       if (!selectedProductInCart){
         setCart([
         newProductObj,
@@ -83,7 +97,6 @@ export default function SalePage() {
               display: 'flex',
               flexDirection: 'column',
               width: "100%",
-              height: '100dvh',
               gap: 1,
               bgcolor: '#f5f7fa',
               border: '1px solid',
@@ -162,14 +175,23 @@ export default function SalePage() {
               <Option value={2}>2</Option>
             </Select>
           </Box>
-
-            <Table sx={{ '& thead th:nth-of-type(2)': { width: '40%' } }}>
+            <Sheet
+            variant="outlined"
+            sx={{
+              flex: 1, 
+              overflow: 'auto', 
+              borderRadius: 'sm',
+              bgcolor: 'background.surface',
+            }}
+          >
+            <Table stickyFooter sx={{ '& thead th:nth-of-type(2)': { width: '40%' }, borderRadius: '20%' }}>
               <thead>
                 <tr>
                   <th>Zdjęcie</th>
                   <th>Nazwa</th>
                   <th>Rozmiar</th>
                   <th>Ilość</th>
+                  <th>Cena</th>
                   <th>Usuń</th>
                 </tr>
               </thead>
@@ -185,15 +207,24 @@ export default function SalePage() {
                     <td>{product.name}</td>
                     <td>{product.size}</td>
                     <td>{product.amount}</td>
+                    <td>{(product.price * product.amount).toFixed(2)} zł</td>
                     <td><Button variant='outlined' onClick={()=>{deleteFromCart(product)}} color='danger' ><ClearIcon/></Button></td>
                   </tr>
                 ))}
               </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan={5}>Suma</td>
+                  <td>{summaryPrice.toFixed(2)} zł</td>
+                </tr>
+              </tfoot>
             </Table>
+          </Sheet>
             <Box sx={{mg:2, display: 'flex',justifyContent: 'flex-end'}}>
-                <Button onClick={() => {setCart([])} } color='danger'>Anuluj</Button>
-                <Button onClick={() => {handleReceipt()}}>Zatwierdź</Button>
+                <Button onClick={() => {resetReceipt()} } color='danger'>Anuluj</Button>
+                <Button onClick={() => {handleReceipt()}} color='success'>Zatwierdź</Button>
             </Box>
+          
           </Box>
         </Box>
       </React.Fragment>

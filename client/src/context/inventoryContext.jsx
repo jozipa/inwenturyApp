@@ -1,5 +1,5 @@
 import React, { createContext,useEffect, useMemo, useState, useContext } from "react";
-import { fetchInventory, updateProducts, fetchSizeTemplates, addNewProduct, updateProductsFromCart } from "../api/productsApi.js";
+import { fetchInventory, updateProducts, fetchSizeTemplates, addNewProduct, updateProductsFromCart, handleReceipt } from "../api/productsApi.js";
 
 const InventoryContext = createContext(null);
 
@@ -45,8 +45,6 @@ export function InventoryProvider({children}) {
     const allProducts = useMemo(() => {
         if (models.length==0) return [];
         const modelsByID = Object.fromEntries(models.map(m => [m.id, m]));
-        console.log(modelsByID[1].name, 'modelsIID');
-        console.log(products);
         
         
         return products.map(product => ({
@@ -88,7 +86,7 @@ export function InventoryProvider({children}) {
 
     const processProductsFromCartSale = async (scannedItems) => {
         try {
-            const response = await updateProductsFromCart(scannedItems);
+            const response = await handleReceipt(scannedItems);
             return response
         } catch (error){
             return false
@@ -103,7 +101,7 @@ export function InventoryProvider({children}) {
                     barcode.trim() === "" ? null : barcode
                 ])
             );
-            console.log(cleanedSizesBarcode);
+          
             
            const formData = new FormData();
             formData.append('name', name);
@@ -128,7 +126,7 @@ export function InventoryProvider({children}) {
         </InventoryContext.Provider>
     )
 
-}
+}     
 
 export function useInventory() {
   return useContext(InventoryContext);

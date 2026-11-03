@@ -40,20 +40,19 @@ function initDb() {
       FOREIGN KEY (model_id) REFERENCES product_models(id) ON DELETE CASCADE
     );
 
-    CREATE TABLE IF NOT EXISTS transactions (
+    CREATE TABLE IF NOT EXISTS receipts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        type TEXT NOT NULL,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        total_amount REAL NOT NULL
+        price REAL DEFAULT 0
     );
 
-    CREATE TABLE IF NOT EXISTS transaction_items (
+    CREATE TABLE IF NOT EXISTS receipt_products (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      transaction_id INTEGER NOT NULL,
+      receipt_id INTEGER NOT NULL,
       product_id INTEGER NOT NULL,
-      quantity INTEGER NOT NULL DEFAULT 1,
-      unit_price REAL NOT NULL DEFAULT 0, 
-      FOREIGN KEY (transaction_id) REFERENCES transactions (id) ON DELETE CASCADE,
+      quantity INTEGER NOT NULL DEFAULT 0,
+      unit_price REAL DEFAULT 0, 
+      FOREIGN KEY (receipt_id) REFERENCES receipts (id) ON DELETE CASCADE,
       FOREIGN KEY (product_id) REFERENCES products (id)
     );
   `);

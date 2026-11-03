@@ -65,18 +65,29 @@ exports.updateProducts = async (body) => {
     receiptTransaction(body.scannedItems);
 }
 
+function decreaseStock(productId, quantity) {
+
+  const result = db.prepare(`
+    UPDATE products 
+    SET count = count - ? 
+    WHERE id = ? AND count >= ?
+  `).run(quantity, productId, quantity);
+
+  if (result.changes === 0) {
+    throw new Error(`Za mało towaru na stanie (ID: ${productId})`);
+  }
+}
+exports.decreaseStock = decreaseStock;
+
 exports.updateProductsFromCart = async (body) => {
-    const updateProduct = db.prepare(`UPDATE products
-        SET count = MAX(0, count - ?)
-        WHERE id = ?
-        `)
-    
+
     const receiptTransaction = db.transaction((items) => {
         for (const product of items){
-            updateProduct.run(product.count, product.id);
+            decreaseStock(product.count, product.id);
         }
     })
     
     receiptTransaction(body.scannedItems);
 }
+
 
