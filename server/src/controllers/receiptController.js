@@ -11,9 +11,7 @@ exports.handleReceipt = (req, res)=>{
 
 exports.getReceipt = (req, res) => {
     try {
-        console.log("geteer");
         const receiptsGrouped = receiptService.fetchReceipts();
-        console.log(receiptsGrouped);
         res.status(200).json(receiptsGrouped);
     }   catch (error) {
         res.status(500).json({error: error.message})

@@ -55,6 +55,24 @@ function initDb() {
       FOREIGN KEY (receipt_id) REFERENCES receipts (id) ON DELETE CASCADE,
       FOREIGN KEY (product_id) REFERENCES products (id)
     );
+
+    CREATE TABLE IF NOT EXISTS deliveries (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        recieved_at DATETIME DEFAULT NULL,
+        status TEXT NOT NULL DEFAULT 'PENDING',
+        description TEXT 
+    );
+
+    CREATE TABLE IF NOT EXISTS delivery_products (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      delivery_id INTEGER NOT NULL,
+      product_id INTEGER NOT NULL,
+      ordered_quantity INTEGER NOT NULL DEFAULT 0,
+      recieved_quantity REAL DEFAULT 0, 
+      FOREIGN KEY (delivery_id) REFERENCES deliveries (id) ON DELETE CASCADE,
+      FOREIGN KEY (product_id) REFERENCES products (id)
+    );
   `);
 
   const insertTemplate = db.prepare(`

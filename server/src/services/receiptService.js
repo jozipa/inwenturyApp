@@ -1,4 +1,3 @@
-const { fetchReceipts } = require('../../../client/src/api/productsApi');
 const db = require('../config/db');
 const productService = require('./productService');
 
@@ -54,13 +53,14 @@ SELECT
             'unitPrice', rp.unit_price
         )
     ) AS items
-FROM receipts r
-JOIN receipt_products rp ON r.id = rp.receipt_id
-JOIN products p ON rp.product_id = p.id
-JOIN product_models pm ON p.model_id = pm.id
-WHERE r.created_at >= date('now', '-7 days')
-GROUP BY r.id
-ORDER BY r.created_at DESC;`)
+    FROM receipts r
+    JOIN receipt_products rp ON r.id = rp.receipt_id
+    JOIN products p ON rp.product_id = p.id
+    JOIN product_models pm ON p.model_id = pm.id
+    --WHERE r.created_at >= date('now', '-7 days')
+    WHERE r.price > 0
+    GROUP BY r.id
+    ORDER BY r.created_at DESC;`)
     const response = getReceiptsGroupedStmt.all()
         
     return response;
