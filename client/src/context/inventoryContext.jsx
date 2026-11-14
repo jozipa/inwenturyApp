@@ -101,9 +101,8 @@ export function InventoryProvider({children}) {
                     barcode.trim() === "" ? null : barcode
                 ])
             );
-          
             
-           const formData = new FormData();
+            const formData = new FormData();
             formData.append('name', name);
             formData.append('description', desc);
             formData.append('type', type);

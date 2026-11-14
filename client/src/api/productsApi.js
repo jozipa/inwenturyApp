@@ -44,10 +44,13 @@ export async function fetchDeliveries() {
 }
 
 export async function fetchDeliveryById(id) {
-    const response = await fetch(`${API_URL}/deliveries/${id}`)
-
+    const response = await fetch(`${API_URL}/deliveries/delivery/${id}`)
+    console.log('adresii', `${API_URL}/deliveries/${id}`);
+    
     if(!response.ok) throw new Error('Błąd pobierania dostaw!');
-
+    
+    
+    
     const responseParsed = await response.json();
     return responseParsed;
 }
@@ -76,6 +79,19 @@ export async function updateProductsExpectedQuantity(products){
     });
 
     if (!response.ok) throw new Error('Błąd zatwierdzania paragonu');
+    return await response.json();
+}
+
+export async function updateDelivery(id, products){
+    console.log(JSON.stringify(products), 'bromenikkurwidolek');
+    
+    const response = await fetch(`${API_URL}/deliveries/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(products),
+    });
+
+    if (!response.ok) throw new Error('Błąd zatwierdzania dostawy');
     return await response.json();
 }
 

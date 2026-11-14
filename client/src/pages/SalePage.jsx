@@ -23,128 +23,127 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 
 export default function SalePage() {
-    const { allProducts, processProductsFromCartSale, loading } = useInventory();
-    const {showSnackbar} = useSnackbar();
-    const [amount, setAmount] = useState(1);
-    const [inputValue, setInputValue] = useState("");
-    const [cart, setCart] = useState([]);
-    const [summaryPrice, setSummaryPrice] = useState(0);
+  const { allProducts, processProductsFromCartSale, loading } = useInventory();
+  const { showSnackbar } = useSnackbar();
+  const [amount, setAmount] = useState(1);
+  const [inputValue, setInputValue] = useState("");
+  const [cart, setCart] = useState([]);
+  const [summaryPrice, setSummaryPrice] = useState(0);
 
-    function deleteFromCart(selectedProduct){
-      console.log(selectedProduct);
-      setCart(l => l.filter(item => item.id != selectedProduct.id));
-      const newPrice = summaryPrice-(selectedProduct.price*selectedProduct.amount)
-      setSummaryPrice(newPrice);
+  function deleteFromCart(selectedProduct) {
+    setCart(l => l.filter(item => item.id != selectedProduct.id));
+    const newPrice = summaryPrice - (selectedProduct.price * selectedProduct.amount)
+    setSummaryPrice(newPrice);
+  }
+
+  function resetReceipt() {
+    setAmount(1);
+    setCart([]);
+    setSummaryPrice(0);
+  }
+
+  async function handleReceipt() {
+    const parsedCart = cart.map((el) => {
+      return { id: el.id, count: el.amount, price: el.price };
+    });
+    const response = await processProductsFromCartSale(parsedCart);
+    if (response) {
+      resetReceipt();
+      showSnackbar("Pomyslnie zaktualizowano stan produktów!");
+    } else {
+      showSnackbar("Nie udało się zaktualizować stanu produktów!", "danger");
     }
+  }
 
-    function resetReceipt(){
-      setAmount(1);
-      setCart([]);
-      setSummaryPrice(0);
-    }
+  function addToCart(selectedProduct) {
+    const selectedProductInCart = cart.find((el) => el.id == selectedProduct.id);
+    const newProductObj = { ...selectedProduct, amount: amount };
 
-    async function handleReceipt(){
-      const parsedCart = cart.map((el) => {
-        return {id: el.id, count: el.amount, price: el.price};
-      });
-      const response = await processProductsFromCartSale(parsedCart);
-      if (response){
-        resetReceipt();
-        showSnackbar("Pomyslnie zaktualizowano stan produktów!");
-      } else {
-        showSnackbar("Nie udało się zaktualizować stanu produktów!", "danger");
-      }
-    }
-
-    function addToCart(selectedProduct){
-      const selectedProductInCart = cart.find((el) => el.id == selectedProduct.id);
-      const newProductObj = {...selectedProduct, amount: amount};
-
-      const newPrice = summaryPrice + (selectedProduct.price * amount)
-      setSummaryPrice(newPrice);
-      if (!selectedProductInCart){
-        setCart([
+    const newPrice = summaryPrice + (selectedProduct.price * amount)
+    setSummaryPrice(newPrice);
+    if (!selectedProductInCart) {
+      setCart([
         newProductObj,
         ...cart,
       ])
-      } else {
-        const newCart = cart.map((el) => {
-          if (el.id==selectedProductInCart.id){
-            return {...el, amount: el.amount+1}
-          } else {
-            return el
-          }
-        })
-        setCart(newCart);
-      }
+    } else {
+      const newCart = cart.map((el) => {
+        if (el.id == selectedProductInCart.id) {
+          return { ...el, amount: el.amount + 1 }
+        } else {
+          return el
+        }
+      })
+      setCart(newCart);
     }
+  }
 
-    
-    if (loading){
-      return <Typography>Ładowanie zasobów...</Typography>;
-    } 
 
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Box sx={{ display: 'flex', height: 'calc(100vh - 70px)', overflow: 'hidden' }}>
+  if (loading) {
+    return <Typography>Ładowanie zasobów...</Typography>;
+  }
+
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Box sx={{ display: 'flex', height: 'calc(100vh - 70px)', overflow: 'hidden' }}>
+        <Box
+          sx={{
+            px: { xs: 2, md: 4 },
+            pt: 0,
+            pb: 10,
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            width: "100%",
+            gap: 1,
+            bgcolor: '#f5f7fa',
+            border: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
           <Box
             sx={{
-              px: { xs: 2, md: 4 },
-              pt: 0,
-              pb: 10,
-              flex: 1,
               display: 'flex',
-              flexDirection: 'column',
-              width: "100%",
+              my: 2,
               gap: 1,
-              bgcolor: '#f5f7fa',
-              border: '1px solid',
-              borderColor: 'divider',
+              flexDirection: { xs: 'column' },
+              alignItems: { xs: 'start' },
+              flexWrap: 'wrap',
+              justifyContent: 'space-between',
             }}
           >
-            <Box
-              sx={{
-                display: 'flex',
-                my: 2,
-                gap: 1,
-                flexDirection: { xs: 'column' },
-                alignItems: { xs: 'start'},
-                flexWrap: 'wrap',
-                justifyContent: 'space-between',
-              }}
-            >
-              <Typography level="h1" component="h1">
-                Sprzedaż
-              </Typography>
-            </Box>
+            <Typography level="h1" component="h1">
+              Sprzedaż
+            </Typography>
+          </Box>
 
-            <Box sx={{
-                display: 'flex',
-                my: 2,
-                gap: 1,
-                flexDirection: { xs: 'row' },
-                alignItems: { xs: 'start'},
-                flexWrap: 'wrap',
-              }}>
-              <Autocomplete
-                placeholder="Wyszukaj przedmiot"
-                sx={{ width: 700 }}
-                inputValue={inputValue}
-                options={allProducts}
-                getOptionLabel={(option) => `${option.name} Rozmiar: ${option.size}`}
-                onInputChange={(event, value) => {
-                  
-                  if (event?.type == 'change'){
-                    setInputValue(value)
-                  }
-                }}
-                onChange={(event, selectedProduct) => {
-                  if (selectedProduct){
-                    setInputValue('');
-                    addToCart(selectedProduct);
-                  } 
-                }}
+          <Box sx={{
+            display: 'flex',
+            my: 2,
+            gap: 1,
+            flexDirection: { xs: 'row' },
+            alignItems: { xs: 'start' },
+
+          }}>
+            <Autocomplete
+              placeholder="Wyszukaj przedmiot"
+              sx={{ width: '100%' }}
+              inputValue={inputValue}
+              options={allProducts}
+              getOptionLabel={(option) => `${option.name} Rozmiar: ${option.size}`}
+              onInputChange={(event, value) => {
+
+                if (event?.type == 'change') {
+                  setInputValue(value)
+                }
+              }}
+              onChange={(event, selectedProduct) => {
+                if (selectedProduct) {
+                  setInputValue('');
+                  addToCart(selectedProduct);
+                }
+              }}
 
               renderOption={(props, option) => {
                 const { key, ...otherProps } = props;
@@ -160,24 +159,26 @@ export default function SalePage() {
                       />
                     </ListItemDecorator>
                     <ListItemContent sx={{ fontSize: 'md' }}>
-                      {option.name} 
+                      {option.name}
                       <Typography level="body-xs">
                         Rozmiar: {option.size}
                       </Typography>
                     </ListItemContent>
                   </AutocompleteOption>
-              )}}
+                )
+              }}
             />
-            <Select value={amount} onChange={(e, newValue) => {setAmount(newValue)}}>
-              <Option value={1}>1</Option>
-              <Option value={2}>2</Option>
+            <Select sx={{ minWidth: "60px" }} value={amount} onChange={(e, newValue) => { setAmount(newValue) }}>
+              {[1, 2, 3, 4, 5, 6].map((el) => (
+                <Option value={el}>{el}</Option>
+              ))}
             </Select>
           </Box>
-            <Sheet
+          <Sheet
             variant="outlined"
             sx={{
-              flex: 1, 
-              overflow: 'auto', 
+              flex: 1,
+              overflow: 'auto',
               borderRadius: 'sm',
               bgcolor: 'background.surface',
             }}
@@ -197,16 +198,16 @@ export default function SalePage() {
                 {cart.map((product) => (
                   <tr key={product.id}>
                     <td><img
-                        loading="lazy"
-                        width="40"
-                        src={`${API_URL}${product.imageUrl}`}
-                        alt="niezaladowano"
-                      /></td>
+                      loading="lazy"
+                      width="40"
+                      src={`${API_URL}${product.imageUrl}`}
+                      alt="niezaladowano"
+                    /></td>
                     <td>{product.name}</td>
                     <td>{product.size}</td>
                     <td>{product.amount}</td>
                     <td>{(product.price * product.amount).toFixed(2)} zł</td>
-                    <td><Button variant='outlined' onClick={()=>{deleteFromCart(product)}} color='danger' ><ClearIcon/></Button></td>
+                    <td><Button variant='outlined' onClick={() => { deleteFromCart(product) }} color='danger' ><ClearIcon /></Button></td>
                   </tr>
                 ))}
               </tbody>
@@ -218,13 +219,13 @@ export default function SalePage() {
               </tfoot>
             </Table>
           </Sheet>
-            <Box sx={{mg:2, display: 'flex',justifyContent: 'flex-end'}}>
-                <Button onClick={() => {resetReceipt()} } color='danger'>Anuluj</Button>
-                <Button onClick={() => {handleReceipt()}} color='success'>Zatwierdź</Button>
-            </Box>
-          
+          <Box sx={{ mg: 2, display: 'flex', justifyContent: 'flex-end' }}>
+            <Button onClick={() => { resetReceipt() }} color='danger'>Anuluj</Button>
+            <Button onClick={() => { handleReceipt() }} color='success'>Zatwierdź</Button>
           </Box>
+
         </Box>
-      </React.Fragment>
+      </Box>
+    </React.Fragment>
   );
 }

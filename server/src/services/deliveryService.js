@@ -110,16 +110,16 @@ const createDeliveryTransaction = db.transaction((deliveryData) => {
     return deliveryId;
 });
 
-const recieveDeliveryTransactionStmt = db.transaction((data) => {
-    const result = updateStatusStmt.run(data.deliveryId);
+const recieveDeliveryTransactionStmt = db.transaction((deliveryId, products) => {
+    const result = updateStatusStmt.run(deliveryId);
 
     if (result.changes === 0) {
         throw new Error('Dostawa nie istnieje lub została już wcześniej odebrana.');
     }
 
-    for (const product of data.products) {
+    for (const product of products) {
         productService.updateStock(product.id, product.quantity);
-        updateDeliveryProductStmt.run(product.quantity, product.id, data.deliveryId);
+        updateDeliveryProductStmt.run(product.quantity, product.id, deliveryId);
     }
 
     return { success: true };
@@ -153,8 +153,8 @@ exports.addNewDeliveryProduct = (product) => {
     );
 };
 
-exports.recieveDelivery = (data) => {
-    return recieveDeliveryTransactionStmt(data);
+exports.recieveDelivery = (deliveryId, products) => {
+    return recieveDeliveryTransactionStmt(deliveryId, products);
 };
 
 exports.generateDelivery = () => {

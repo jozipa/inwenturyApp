@@ -14,6 +14,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import DownloadRoundedIcon from '@mui/icons-material/DownloadRounded';
 import { fetchReceipts } from '../api/productsApi.js';
 import CollapsibbleRow from '../components/CollapsibleRow.jsx'
+import MainHeader from '../components/MainHeader.jsx';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -64,31 +65,13 @@ export default function RaportsPage() {
         display: 'flex',
         flexDirection: 'column',
         height: 'calc(100vh - 70px)',
-        p: 3,
+        px: 3,
         bgcolor: '#f5f7fa',
         overflow: 'hidden',
         boxSizing: 'border-box',
       }}
     >
-      <Box
-        sx={{
-          display: 'flex',
-          gap: 1,
-          mb: 2,
-          flexDirection: { xs: 'column', sm: 'row' },
-          alignItems: { xs: 'start', sm: 'center' },
-          justifyContent: 'space-between',
-        }}
-      >
-        <Typography level="h1">Raporty</Typography>
-        <Button
-          color="primary"
-          startDecorator={<DownloadRoundedIcon />}
-          size="sm"
-        >
-          Download PDF
-        </Button>
-      </Box>
+      <MainHeader info={"Raporty"}></MainHeader>
 
       <Input
         color="neutral"

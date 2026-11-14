@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import * as React from 'react'
 import { useInventory } from '../context/inventoryContext.jsx';
 import { useSnackbar } from '../context/snackBarContext.jsx';
@@ -18,13 +19,13 @@ import {
     Table,
     Typography,
     Breadcrumbs,
-    Link
 } from '@mui/joy';
 
 export default function ManageDelivery() {
     const { showSnackbar } = useSnackbar();
     const [deliveries, setDeliveries] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchDeliveries()
@@ -98,7 +99,7 @@ export default function ManageDelivery() {
                         </thead>
                         <tbody>
                         {deliveries.map((delivery) => (
-                            <tr key={delivery.delivery_id}> 
+                            <tr key={delivery.delivery_id} onClick={() => navigate(`/manageDelivery/${delivery.delivery_id}`)}> 
                                 <td>{delivery.delivery_id}</td>
                                 <td>{delivery.created_at}</td>
                                 <td><Chip color={getColor(delivery.status)} variant='soft'>{delivery.status}</Chip></td>

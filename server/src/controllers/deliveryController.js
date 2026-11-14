@@ -24,6 +24,7 @@ exports.getDelivery = (req, res) => {
 
 exports.generateDelivery = (req, res) => {
     try {
+        
         const response = deliveryService.generateDelivery();
         res.status(200).json(response);
     } catch (error){
@@ -34,11 +35,21 @@ exports.generateDelivery = (req, res) => {
 exports.handleDelivery = (req, res) => {
     try {
         const data = req.body
-        console.log(data, "data, czyli inaczej dane ktore przesylam do funkcji createDelivery (zapisalem na kartce jak byc powinno)");
         const response = deliveryService.createDelivery(data);
         res.status(200).json({message: `pomyślnie utworzono dostawę o id ${response}`});
     } catch (error){
         res.status(500).json({message: error.message});
+    }
+}
+
+exports.recieveDelivery = (req, res) => {
+    try {
+        const products = req.body
+        const response = deliveryService.recieveDelivery(req.params.id,products);
+
+        res.status(200).json({success: true,message: `pomyślnie zaksiegowano dostawę o id ${response}`});
+    } catch(error){
+        res.status(500).json({success: false, message: error.message})
     }
 }
 

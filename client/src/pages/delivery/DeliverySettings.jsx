@@ -1,11 +1,11 @@
 import { useState, useMemo } from 'react';
 import * as React from 'react'
-import { useInventory } from '../context/inventoryContext.jsx';
-import { useSnackbar } from '../context/snackBarContext.jsx';
+import { useInventory } from '../../context/inventoryContext.jsx';
+import { useSnackbar } from '../../context/snackBarContext.jsx';
 const API_URL = import.meta.env.VITE_API_URL;
 import CssBaseline from '@mui/joy/CssBaseline';
-import { updateProductsExpectedQuantity } from '../api/productsApi.js';
-import MainHeader from '../components/MainHeader.jsx';
+import { updateProductsExpectedQuantity } from '../../api/productsApi.js';
+import MainHeader from '../../components/MainHeader.jsx';
 
 import {
   Box,
@@ -70,7 +70,7 @@ function DeliverySettings() {
           >
             <MainHeader info={"Ustawienia Dostaw"}></MainHeader>
 
-            <Sheet
+          <Sheet
             variant="outlined"
             sx={{
               flex: 1, 
