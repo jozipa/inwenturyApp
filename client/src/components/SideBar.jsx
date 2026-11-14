@@ -1,5 +1,6 @@
 import React from 'react';
 import { Outlet, Link as RouterLink } from 'react-router-dom';
+import { useState } from 'react';
 
 import {
   List,
@@ -16,9 +17,10 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import StoreIcon from '@mui/icons-material/Store';
-
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 
 export default function Sidebar() {
+  const [open, setOpen] = useState(false);
 
   return (
     <Sheet
@@ -45,7 +47,7 @@ export default function Sidebar() {
         Grodzka 29
       </Typography>
 
-     
+
       <List
         size="lg"
         sx={{
@@ -91,14 +93,42 @@ export default function Sidebar() {
           </ListItemButton>
         </ListItem>
 
-        <ListItem>
-          <ListItemButton component={RouterLink} to="/#">
+        <ListItem nested>
+          <ListItemButton onClick={() => setOpen(!open)}>
             <ListItemDecorator>
-              <SettingsIcon />
+              <LocalShippingIcon />
             </ListItemDecorator>
-            Ustawienia
+            Dostawy
           </ListItemButton>
+          {open && (<List>
+            <ListItem>
+              <ListItemButton component={RouterLink} to="/deliverySettings">
+                <ListItemDecorator>
+                  <SettingsIcon />
+                </ListItemDecorator>
+                Ustawienia
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton component={RouterLink} to="/newDelivery">
+                <ListItemDecorator>
+                  <LocalShippingIcon />
+                </ListItemDecorator>
+                Nowa Dostawa
+              </ListItemButton>
+            </ListItem>
+            <ListItem>
+              <ListItemButton component={RouterLink} to="/manageDelivery">
+                <ListItemDecorator>
+                  <LocalShippingIcon />
+                </ListItemDecorator>
+                Zarzadzaj
+              </ListItemButton>
+            </ListItem>
+          </List>)}
         </ListItem>
+
+
       </List>
     </Sheet>
   );

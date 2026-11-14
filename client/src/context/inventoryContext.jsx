@@ -1,5 +1,5 @@
 import React, { createContext,useEffect, useMemo, useState, useContext } from "react";
-import { fetchInventory, updateProducts, fetchSizeTemplates, addNewProduct, updateProductsFromCart, handleReceipt } from "../api/productsApi.js";
+import { fetchInventory, updateProducts, fetchSizeTemplates, addNewProduct, handleReceipt } from "../api/productsApi.js";
 
 const InventoryContext = createContext(null);
 

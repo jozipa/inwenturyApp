@@ -51,11 +51,13 @@ exports.updateProducts = (req, res) => {
     }
 }
 
-exports.updateProductsFromCart = (req, res) => {
-  try {
-    productService.updateProductsFromCart(req.body);
-    res.status(201).json({message: "Pomyślnie zaktualizowano produkty z paragonu"});
-  } catch (error){
-    res.status(500).json({error: error.message});
-  }
+exports.updateProductsExpectedQuantity = (req, res) => {
+    try {
+      console.log(req.body, 'powinnien byc products: []');
+      
+      productService.updateProductsExpectedQuantity(req.body);
+      res.status(201).json({message: "Pomyślnie zaktualizowano produkt"});
+    } catch (error){
+      res.status(500).json({message: error.message})
+    }
 }

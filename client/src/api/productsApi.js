@@ -16,7 +16,6 @@ export async function fetchSizeTemplates(){
     return await response.json();
 };
 
-
 export async function fetchReceipts(){
     const response = await fetch(`${API_URL}/receipts`);
 
@@ -27,6 +26,30 @@ export async function fetchReceipts(){
         ...element,
         items: JSON.parse(element.items || '[]'),
     }));
+}
+
+export async function fetchGeneratedDelivery() {
+    const response = await fetch(`${API_URL}/deliveries/generate`);
+    if (!response.ok) throw new Error('Błąd pobierania bazy rozmiarów');
+    const responseParsed =  await response.json();
+    return responseParsed;
+}
+
+export async function fetchDeliveries() {
+    const response = await fetch(`${API_URL}/deliveries`);
+    if(!response.ok) throw new Error('Błąd pobierania dostaw!');
+
+    const responseParsed = await response.json();
+    return responseParsed;
+}
+
+export async function fetchDeliveryById(id) {
+    const response = await fetch(`${API_URL}/deliveries/${id}`)
+
+    if(!response.ok) throw new Error('Błąd pobierania dostaw!');
+
+    const responseParsed = await response.json();
+    return responseParsed;
 }
 
 // ------------------------------------ updaters -----------------------------------------------
@@ -43,15 +66,19 @@ export async function updateProducts(scannedItems){
     return await response.json();
 }
 
-export async function updateProductsFromCart(scannedItems){
-    const response = await fetch(`${API_URL}/products/cart`, {
+export async function updateProductsExpectedQuantity(products){
+    console.log(JSON.stringify({products}));
+    
+    const response = await fetch(`${API_URL}/products/expectedQuantity`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({scannedItems}),
+        body: JSON.stringify({products}),
     });
+
     if (!response.ok) throw new Error('Błąd zatwierdzania paragonu');
     return await response.json();
 }
+
 
 // ------------------------------------ adders -----------------------------------------------
 
@@ -72,6 +99,18 @@ export async function handleReceipt(scannedItems){
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(scannedItems),
+    });
+    if (!response.ok) throw new Error('Błąd zatwierdzania paragonu');
+    return await response.json();
+}
+
+export async function addNewDelivery(products, description) {
+    console.log(JSON.stringify({products, description}), 'wysylamy');
+
+    const response = await fetch(`${API_URL}/deliveries/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({products, description}),
     });
     if (!response.ok) throw new Error('Błąd zatwierdzania paragonu');
     return await response.json();

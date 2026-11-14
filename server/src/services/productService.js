@@ -14,8 +14,6 @@ exports.getSizeTemplates = () => {
 }
 
 exports.createProductModel = (body) => {
-    console.log('ostatni etap');
-    
     const insertModel = db.prepare(`
         INSERT INTO product_models (name, description, type, imageUrl, categories)
         VALUES (?,?,?,?,?)
@@ -36,7 +34,6 @@ exports.createProductModel = (body) => {
             body.categories,
         );
         const newModelId = info.lastInsertRowid;
-        console.log(info);
         
 
         for (const [size,barcode] of Object.entries(body.sizesBarcode)){ 
@@ -51,6 +48,7 @@ exports.createProductModel = (body) => {
 };
 
 exports.updateProducts = async (body) => {
+    
     const updateProduct = db.prepare(`UPDATE products
         SET count = MAX(0, count + ?)
         WHERE id = ?
@@ -64,6 +62,15 @@ exports.updateProducts = async (body) => {
     
     receiptTransaction(body.scannedItems);
 }
+
+function setExpectedQuantity(productId, quantity){
+    const result = db.prepare(`
+    UPDATE products 
+    SET expected_quantity = ?
+    WHERE id = ?
+  `).run(quantity, productId);
+}
+exports.setExpectedQuantity = setExpectedQuantity;
 
 function decreaseStock(productId, quantity) {
 
@@ -79,15 +86,29 @@ function decreaseStock(productId, quantity) {
 }
 exports.decreaseStock = decreaseStock;
 
-exports.updateProductsFromCart = async (body) => {
+function updateStock(productId, quantity) {
 
-    const receiptTransaction = db.transaction((items) => {
+  const result = db.prepare(`
+    UPDATE products 
+    SET count = count + ? 
+    WHERE id = ? AND count + ? >= 0
+  `).run(quantity, productId, quantity);
+
+  if (result.changes === 0) {
+    throw new Error(`Za mało towaru na stanie (ID: ${productId})`);
+  }
+}
+exports.updateStock = updateStock;
+
+exports.updateProductsExpectedQuantity = async (body) => {
+
+    const updateProductsTransaction = db.transaction((items) => {
         for (const product of items){
-            decreaseStock(product.count, product.id);
+            setExpectedQuantity(product.id, product.count);
         }
     })
     
-    receiptTransaction(body.scannedItems);
+    updateProductsTransaction(body.products);
 }
 
 

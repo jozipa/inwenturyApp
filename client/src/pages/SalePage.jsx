@@ -141,8 +141,6 @@ export default function SalePage() {
                 }}
                 onChange={(event, selectedProduct) => {
                   if (selectedProduct){
-                    console.log('chango');
-                    
                     setInputValue('');
                     addToCart(selectedProduct);
                   } 

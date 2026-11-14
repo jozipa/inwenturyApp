@@ -5,7 +5,29 @@ exports.getDeliveries = (req, res ) => {
         const response = deliveryService.fetchDeliveries();
         res.status(200).json(response)
     } catch(error) {
-        res.status(500).json({message: error.message})
+        res.status(500).json({message: error.message});
+    }
+}
+
+exports.getDelivery = (req, res) => {
+    try {
+        const response = deliveryService.getDeliveryFromId(req.params.id);
+        if (response.delivery_id == null) {
+            res.status(404).json({message: "No such delivery"})
+        } else {
+            res.status(200).json(response);
+        }
+    } catch (error){
+        res.status(404).json({message: error.message});
+    }
+}
+
+exports.generateDelivery = (req, res) => {
+    try {
+        const response = deliveryService.generateDelivery();
+        res.status(200).json(response);
+    } catch (error){
+        res.status(500).json({message: error.message});
     }
 }
 

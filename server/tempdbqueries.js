@@ -8,22 +8,9 @@ const db = new Database(dbPath);
 
 console.log('Rozpoczynam aktualizację tabeli product_types...');
 
-/*
-db.exec(`
-  BEGIN TRANSACTION;
+db.prepare(`
+  ALTER TABLE products
+  ADD expected_quantity INTEGER NOT NULL DEFAULT 0;
+  `).run();
 
-  -- 1. Usuń produkty z ceną 0
-  DELETE FROM products
-  WHERE price = 0;
-
-  -- 2. Usuń modele, które nie mają już żadnych przypisanych produktów
-  DELETE FROM product_models
-  WHERE id NOT IN (
-    SELECT DISTINCT model_id FROM products
-  );
-
-  COMMIT;
-`);*/
-
-db.exec(`DELETE * FROM receipts`);
 

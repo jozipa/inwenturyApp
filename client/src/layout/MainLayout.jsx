@@ -6,8 +6,6 @@ import Header from '../components/Header.jsx';
 import Sidebar from '../components/SideBar.jsx';
 
 
-
-
  export default function MainLayout() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     
@@ -24,16 +22,13 @@ import Sidebar from '../components/SideBar.jsx';
             height: 'calc(100vh - 70px)', 
             overflowY: 'hiddden',
             }}>
-              {sidebarOpen && <Sidebar />}
-            
+            {sidebarOpen && <Sidebar />}
             
             <Box sx={{flexGrow: 1}}>
               <Outlet />
             </Box>
             
           </Box>
-          
-          
           
       </Box>
   );

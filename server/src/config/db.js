@@ -37,6 +37,7 @@ function initDb() {
       size TEXT NOT NULL,
       count INTEGER NOT NULL DEFAULT 0,
       barcode TEXT UNIQUE,
+      expected_quantity INTEGER NOT NULL DEFAULT 0,
       FOREIGN KEY (model_id) REFERENCES product_models(id) ON DELETE CASCADE
     );
 

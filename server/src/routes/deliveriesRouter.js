@@ -3,8 +3,11 @@ const deliveryController = require('../controllers/deliveryController.js');
 const router = express.Router();
 
 router.get("/", deliveryController.getDeliveries);
-router.post("/", deliveryController.handleReceipt);
+router.get("/:id", deliveryController.getDelivery);
+router.get("/generate", deliveryController.generateDelivery);
+router.post("/", deliveryController.handleDelivery);
 router.post("/product", deliveryController.addProductToDelivery);
+
 
 
 
